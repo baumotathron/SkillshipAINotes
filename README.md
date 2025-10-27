@@ -1,0 +1,2 @@
+# SkillshipAINotes
+Skillship AI notes
