@@ -15,16 +15,17 @@
       }
 
       body {
-        max-width: 900px;
+        max-width: 1100px;
         margin: 0 auto;
-        padding: 40px 60px;
+        padding: 36px 56px;
         font-family:
           'Inter',
           -apple-system,
           BlinkMacSystemFont,
           'Segoe UI',
           sans-serif;
-        line-height: 1.8;
+        font-size: 15px;
+        line-height: 1.7;
         color: #1a1a1a;
         background-color: #ffffff;
         -webkit-font-smoothing: antialiased;
@@ -41,9 +42,62 @@
         .page-break {
           page-break-before: always;
         }
+        .page-layout {
+          column-count: 2;
+          column-gap: 32px;
+        }
       }
 
       /* Header matching preread style */
+      .page-layout {
+        column-gap: 48px;
+      }
+
+      .page-layout h1,
+      .page-layout h2,
+      .page-layout h3,
+      .page-layout h4,
+      .page-layout .section-divider,
+      .page-layout .section-divider-thin,
+      .page-layout .story-box,
+      .page-layout .framework-box,
+      .page-layout .example-box,
+      .page-layout .tip-box,
+      .page-layout .placement-tip,
+      .page-layout .exercise-box,
+      .page-layout .resource-list,
+      .page-layout .flow-diagram,
+      .page-layout .framework-box table,
+      .page-layout .cta-banner,
+      .page-layout .disclaimer,
+      .page-layout .story-box,
+      .page-layout .footer {
+        break-inside: avoid;
+        column-span: all;
+      }
+
+      .page-progress {
+        position: sticky;
+        top: 16px;
+        z-index: 900;
+        margin: 0 auto 24px;
+        width: fit-content;
+        padding: 6px 18px;
+        border-radius: 999px;
+        background: rgba(136, 109, 242, 0.12);
+        color: #5b4cc6;
+        font-size: 0.85em;
+        font-weight: 600;
+        letter-spacing: 0.4px;
+        box-shadow: 0 6px 18px rgba(136, 109, 242, 0.18);
+      }
+
+      @media (min-width: 1200px) {
+        .page-layout {
+          column-count: 2;
+        }
+      }
+
       .header {
         text-align: left;
         margin-bottom: 48px;
@@ -691,6 +745,9 @@
       <button class="back-to-top" id="backToTop" onclick="scrollToTop()" title="Back to top">↑</button>
     </div>
 
+    <div class="page-progress" id="pageProgress">Page 1 of 1</div>
+
+    <main class="page-layout">
     <div class="header" id="top">
       <div class="logo-section">
         <svg class="logo-icon" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1175,6 +1232,8 @@ Structure your analysis with direct quotes supporting each theme.</div>
       <p style="margin-top: 12px;">Ready to validate ideas that matter? Let's make it happen! 🌱</p>
     </div>
 
+    </main>
+
     <script>
       // Get elements
       const backToTopButton = document.getElementById('backToTop');
@@ -1182,6 +1241,8 @@ Structure your analysis with direct quotes supporting each theme.</div>
       const floatingNavMenu = document.getElementById('floatingNavMenu');
       const sections = document.querySelectorAll('h2[id]');
       const navLinks = document.querySelectorAll('.floating-nav-menu a');
+      const pageProgress = document.getElementById('pageProgress');
+      let currentSectionIndex = 1;
 
       // Copy prompt function
       function copyPrompt(templateId) {
@@ -1241,6 +1302,7 @@ Structure your analysis with direct quotes supporting each theme.</div>
 
         // Highlight active section
         updateActiveSection();
+        updatePageProgress();
       });
 
       // Scroll to top function
@@ -1278,13 +1340,19 @@ Structure your analysis with direct quotes supporting each theme.</div>
       // Highlight active section in navigation
       function updateActiveSection() {
         let current = '';
+        currentSectionIndex = 1;
 
-        sections.forEach((section) => {
+        sections.forEach((section, index) => {
           const sectionTop = section.offsetTop;
           if (window.pageYOffset >= sectionTop - 100) {
             current = section.getAttribute('id');
+            currentSectionIndex = index + 1;
           }
         });
+
+        if (!current && sections.length > 0) {
+          current = sections[0].getAttribute('id');
+        }
 
         navLinks.forEach((link) => {
           link.classList.remove('active');
@@ -1292,6 +1360,12 @@ Structure your analysis with direct quotes supporting each theme.</div>
             link.classList.add('active');
           }
         });
+      }
+
+      function updatePageProgress() {
+        if (!pageProgress || sections.length === 0) return;
+        const safeIndex = Math.max(1, Math.min(currentSectionIndex, sections.length));
+        pageProgress.textContent = `Page ${safeIndex} of ${sections.length}`;
       }
 
       // Smooth scroll for navigation links
@@ -1322,6 +1396,7 @@ Structure your analysis with direct quotes supporting each theme.</div>
 
       // Initialize active section on load
       updateActiveSection();
+      updatePageProgress();
     </script>
   
 
