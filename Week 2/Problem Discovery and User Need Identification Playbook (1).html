@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skillship AI - AI Prompt Templates for Problem Validation</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 40px 60px;
+        font-family:
+          'Inter',
+          -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          sans-serif;
+        line-height: 1.8;
+        color: #1a1a1a;
+        background-color: #ffffff;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* Print-friendly styles */
+      @media print {
+        body {
+          padding: 20px;
+        }
+        .no-print {
+          display: none;
+        }
+        .page-break {
+          page-break-before: always;
+        }
+      }
+
+      /* Header matching preread style */
+      .header {
+        text-align: left;
+        margin-bottom: 48px;
+        padding-bottom: 24px;
+        border-bottom: 3px solid #000;
+      }
+
+      .logo-section {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .logo-text {
+        font-size: 1.4em;
+        font-weight: 700;
+        background: linear-gradient(135deg, #886df2 0%, #9b87f5 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        letter-spacing: -0.5px;
+        display: inline-block;
+      }
+
+      .logo-icon {
+        display: inline-block;
+        width: 45px;
+        height: 45px;
+        margin-right: 12px;
+        vertical-align: middle;
+      }
+
+      .header h1 {
+        background: linear-gradient(135deg, #886df2 0%, #9b87f5 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-size: 2em;
+        font-weight: 700;
+        margin-bottom: 12px;
+        line-height: 1.3;
+        letter-spacing: -0.5px;
+      }
+
+      .header-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      .header-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 14px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, rgba(136, 109, 242, 0.14) 0%, rgba(155, 135, 245, 0.2) 100%);
+        color: #5b4cc6;
+        font-size: 0.85em;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+        text-transform: uppercase;
+      }
+
+      .header-subtitle {
+        color: #4a4a4a;
+        font-size: 1.2em;
+        font-weight: 400;
+        margin-top: 8px;
+        line-height: 1.4;
+      }
+
+      .header-description {
+        margin-top: 18px;
+        font-size: 1.02em;
+        color: #2f2f2f;
+        max-width: 700px;
+      }
+
+      .section-divider {
+        width: 100%;
+        height: 2px;
+        background: #e0e0e0;
+        margin: 48px 0;
+      }
+
+      .section-divider-thin {
+        width: 80%;
+        height: 1px;
+        background: linear-gradient(to right, transparent, #d0d0d0, transparent);
+        margin: 32px auto;
+      }
+
+      /* Content boxes matching preread style */
+      .disclaimer {
+        background-color: #f5f5f5;
+        padding: 24px;
+        border-radius: 4px;
+        border-left: 4px solid #666;
+        margin: 32px 0;
+        page-break-inside: avoid;
+      }
+
+      .disclaimer h3 {
+        color: #000;
+        margin-top: 0;
+        margin-bottom: 12px;
+        font-size: 1.2em;
+        font-weight: 600;
+      }
+
+      .story-box {
+        background-color: #fafafa;
+        padding: 28px;
+        border-radius: 4px;
+        margin: 32px 0;
+        border: 1px solid #e0e0e0;
+        page-break-inside: avoid;
+      }
+
+      .framework-box {
+        background-color: #fff;
+        padding: 24px;
+        border-radius: 4px;
+        border: 2px solid #e8e8e8;
+        margin: 28px 0;
+        page-break-inside: avoid;
+      }
+
+      .prompt-box {
+        background: linear-gradient(135deg, rgba(136, 109, 242, 0.05) 0%, rgba(155, 135, 245, 0.05) 100%);
+        padding: 28px;
+        border-radius: 14px;
+        border: 2px solid rgba(155, 135, 245, 0.6);
+        margin: 32px 0;
+        page-break-inside: avoid;
+        position: relative;
+        box-shadow: 0 16px 32px rgba(136, 109, 242, 0.12);
+      }
+
+      .prompt-box h4 {
+        color: #5b4cc6;
+        margin: 0 0 18px;
+        font-size: 1.12em;
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 18px;
+        border-radius: 12px;
+        background: #fff;
+        box-shadow: 0 12px 28px rgba(136, 109, 242, 0.15);
+      }
+
+      .prompt-box h4::before {
+        content: attr(data-icon);
+        font-size: 1.25em;
+      }
+
+      .prompt-box > p {
+        margin-bottom: 20px;
+        color: #3c3c3c;
+      }
+
+      .prompt-text {
+        background-color: #fff;
+        padding: 22px;
+        border-radius: 10px;
+        border: 1px solid rgba(136, 109, 242, 0.2);
+        font-family: 'Courier New', monospace;
+        font-size: 0.92em;
+        line-height: 1.7;
+        margin: 16px 0 0;
+        white-space: pre-wrap;
+        overflow-x: auto;
+        box-shadow: inset 0 0 0 1px rgba(136, 109, 242, 0.08);
+      }
+
+      .prompt-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 18px;
+        flex-wrap: wrap;
+      }
+
+      .copy-btn {
+        background: linear-gradient(135deg, #6f5fe5 0%, #9585f9 100%);
+        color: white;
+        border: none;
+        padding: 9px 20px;
+        border-radius: 999px;
+        font-size: 0.82em;
+        cursor: pointer;
+        font-weight: 600;
+        letter-spacing: 0.4px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .copy-btn::before {
+        content: '📋';
+      }
+
+      .copy-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 22px rgba(136, 109, 242, 0.24);
+      }
+
+      .copy-success {
+        background-color: #4caf50;
+        color: white;
+        padding: 6px 14px;
+        border-radius: 999px;
+        font-size: 0.75em;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-weight: 500;
+      }
+
+      .copy-success::before {
+        content: '✓';
+      }
+
+      .copy-success.show {
+        opacity: 1;
+      }
+
+      .example-box {
+        background-color: #f9f9f9;
+        padding: 20px 24px;
+        border-radius: 4px;
+        border-left: 4px solid #333;
+        margin: 24px 0;
+        page-break-inside: avoid;
+      }
+
+      .think-box {
+        background-color: #fffbf0;
+        padding: 24px;
+        border-radius: 4px;
+        border-left: 4px solid #ff9800;
+        margin: 24px 0;
+        page-break-inside: avoid;
+      }
+
+      .tip-box {
+        background-color: #f0f8f0;
+        padding: 24px;
+        border-radius: 4px;
+        border-left: 4px solid #2e7d32;
+        margin: 28px 0;
+        page-break-inside: avoid;
+      }
+
+      /* Typography matching preread */
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        color: #000;
+        page-break-after: avoid;
+      }
+
+      h2 {
+        font-size: 1.8em;
+        margin-top: 56px;
+        margin-bottom: 24px;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+        background: linear-gradient(135deg, #886df2 0%, #9b87f5 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      h3 {
+        font-size: 1.3em;
+        margin-top: 32px;
+        margin-bottom: 16px;
+        font-weight: 600;
+      }
+
+      h4 {
+        font-size: 1.1em;
+        margin-top: 24px;
+        margin-bottom: 12px;
+        font-weight: 600;
+        color: #333;
+      }
+
+      p {
+        margin-bottom: 16px;
+        color: #1a1a1a;
+        line-height: 1.8;
+      }
+
+      strong {
+        font-weight: 600;
+        color: #000;
+      }
+
+      em {
+        font-style: italic;
+      }
+
+      /* Lists */
+      ul,
+      ol {
+        margin: 16px 0;
+        padding-left: 28px;
+      }
+
+      li {
+        margin-bottom: 12px;
+        line-height: 1.7;
+      }
+
+      ul li::marker {
+        color: #9b87f5;
+      }
+
+      ol li::marker {
+        color: #886df2;
+        font-weight: 600;
+      }
+
+      /* Table of contents */
+      .toc {
+        background: linear-gradient(135deg, rgba(136, 109, 242, 0.05) 0%, rgba(155, 135, 245, 0.05) 100%);
+        padding: 32px;
+        border-radius: 12px;
+        border: 2px solid #9b87f5;
+        margin: 32px 0;
+        box-shadow: 0 4px 12px rgba(136, 109, 242, 0.1);
+      }
+
+      .toc h3 {
+        margin-top: 0;
+        margin-bottom: 20px;
+        color: #886df2;
+        font-size: 1.4em;
+      }
+
+      .toc ul {
+        list-style: none;
+        padding-left: 0;
+      }
+
+      .toc li {
+        margin-bottom: 12px;
+        padding-left: 32px;
+        position: relative;
+        font-size: 1.05em;
+        line-height: 1.6;
+      }
+
+      .toc li:before {
+        content: none;
+      }
+
+      .toc li a {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        color: inherit;
+        text-decoration: none;
+        padding: 8px 12px;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+      }
+
+      .toc li a:hover {
+        background-color: rgba(136, 109, 242, 0.08);
+        transform: translateX(4px);
+      }
+
+      .toc-icon {
+        font-size: 1.2em;
+      }
+
+      .cta-banner {
+        margin: 24px 0 36px;
+        padding: 28px;
+        border-radius: 16px;
+        background: linear-gradient(135deg, rgba(238, 233, 255, 0.9) 0%, rgba(219, 205, 255, 0.9) 100%);
+        border: 2px solid rgba(155, 135, 245, 0.4);
+        box-shadow: 0 16px 40px rgba(136, 109, 242, 0.12);
+      }
+
+      .cta-banner h3 {
+        margin: 0 0 12px;
+        font-size: 1.35em;
+        color: #5b4cc6;
+      }
+
+      .cta-banner p {
+        margin: 0;
+        color: #2f2f2f;
+      }
+
+      /* Special elements */
+      .highlight {
+        background-color: #fff9c4;
+        padding: 3px 8px;
+        border-radius: 3px;
+        font-weight: 500;
+        color: #000;
+      }
+
+      .placeholder {
+        background-color: #ffebee;
+        color: #c62828;
+        font-weight: 600;
+        padding: 2px 6px;
+        border-radius: 3px;
+      }
+
+      /* Footer */
+      .footer {
+        text-align: center;
+        margin-top: 64px;
+        padding-top: 32px;
+        border-top: 2px solid #e0e0e0;
+        color: #666;
+        font-size: 0.9em;
+      }
+
+      /* Floating Action Buttons Container */
+      .floating-buttons {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        z-index: 1000;
+      }
+
+      /* Back to Top Button */
+      .back-to-top {
+        width: 56px;
+        height: 56px;
+        background-color: #333;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        font-size: 24px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .back-to-top.show {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .back-to-top:hover {
+        background-color: #000;
+        transform: translateY(-4px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Navigation Menu Button */
+      .nav-menu-btn {
+        width: 56px;
+        height: 56px;
+        background: linear-gradient(135deg, #886df2 0%, #9b87f5 100%);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        font-size: 24px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 16px rgba(136, 109, 242, 0.4);
+        transition: all 0.3s ease;
+      }
+
+      .nav-menu-btn:hover {
+        background: linear-gradient(135deg, #7759e0 0%, #886df2 100%);
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(136, 109, 242, 0.5);
+      }
+
+      .nav-menu-btn.active {
+        background: linear-gradient(135deg, #6b4fd8 0%, #7759e0 100%);
+      }
+
+      /* Floating Navigation Menu */
+      .floating-nav-menu {
+        position: fixed;
+        bottom: 100px;
+        right: 30px;
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+        padding: 20px;
+        min-width: 300px;
+        max-width: 350px;
+        max-height: 70vh;
+        overflow-y: auto;
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(20px);
+        transition: all 0.3s ease;
+      }
+
+      .floating-nav-menu.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .floating-nav-menu h4 {
+        margin-top: 0;
+        margin-bottom: 16px;
+        font-size: 1.1em;
+        color: #000;
+        padding-bottom: 12px;
+        border-bottom: 2px solid #e0e0e0;
+      }
+
+      .floating-nav-menu ul {
+        list-style: none;
+        padding-left: 0;
+        margin: 0;
+      }
+
+      .floating-nav-menu li {
+        margin-bottom: 4px;
+      }
+
+      .floating-nav-menu a {
+        text-decoration: none;
+        color: #555;
+        font-size: 0.9em;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 12px;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+      }
+
+      .floating-nav-menu a:hover {
+        background-color: #f5f5f5;
+        color: #000;
+        padding-left: 16px;
+      }
+
+      .floating-nav-menu a.active {
+        background: linear-gradient(135deg, #886df2 0%, #9b87f5 100%);
+        color: #fff;
+        font-weight: 500;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        body {
+          padding: 24px 20px;
+        }
+
+        .header h1 {
+          font-size: 1.6em;
+        }
+
+        .header-subtitle {
+          font-size: 1em;
+        }
+
+        h2 {
+          font-size: 1.5em;
+        }
+
+        .floating-buttons {
+          bottom: 20px;
+          right: 20px;
+        }
+
+        .back-to-top,
+        .nav-menu-btn {
+          width: 50px;
+          height: 50px;
+          font-size: 20px;
+        }
+
+        .floating-nav-menu {
+          right: 20px;
+          bottom: 85px;
+          min-width: 260px;
+          max-width: calc(100vw - 40px);
+        }
+
+        .prompt-actions {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .copy-btn {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .copy-success {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Floating Navigation Menu (hidden by default) -->
+    <div class="floating-nav-menu" id="floatingNavMenu">
+      <h4>📑 Quick Navigation</h4>
+      <ul>
+        <li><a href="#top">🏠 Home</a></li>
+        <li><a href="#introduction">📝 How to Use</a></li>
+        <li><a href="#validation">✅ Problem Validation</a></li>
+        <li><a href="#secondary-research">📊 Secondary Research</a></li>
+        <li><a href="#user-research">👥 User Research</a></li>
+        <li><a href="#primary-research">🔍 Primary Research</a></li>
+        <li><a href="#best-practices">💡 Best Practices</a></li>
+      </ul>
+    </div>
+
+    <!-- Floating Action Buttons -->
+    <div class="floating-buttons">
+      <button class="nav-menu-btn" id="navMenuBtn" onclick="toggleNavMenu()" title="Navigation Menu">☰</button>
+      <button class="back-to-top" id="backToTop" onclick="scrollToTop()" title="Back to top">↑</button>
+    </div>
+
+    <div class="header" id="top">
+      <div class="logo-section">
+        <svg class="logo-icon" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="avatar3-face-grad" x1="96" y1="32" x2="96" y2="160" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#F5F3FF" />
+              <stop offset="1" stop-color="#E4E0FF" />
+            </linearGradient>
+            <radialGradient id="avatar3-glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(96 96) rotate(90) scale(80 120)">
+              <stop stop-color="#C4B5FD" stop-opacity="0.3" />
+              <stop offset="1" stop-color="#C4B5FD" stop-opacity="0" />
+            </radialGradient>
+          </defs>
+          <ellipse cx="96" cy="96" rx="80" ry="120" fill="url(#avatar3-glow)" />
+          <path d="M96 24 L160 64 V 128 L96 168 L32 128 V 64 L96 24 Z" fill="url(#avatar3-face-grad)" stroke="#C4B5FD" stroke-width="3" />
+          <path d="M70 90 L85 100 L70 110" stroke="#7E69AB" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M122 90 L107 100 L122 110" stroke="#7E69AB" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M90 130 C92 134, 100 134, 102 130" stroke="#7E69AB" stroke-width="4" stroke-linecap="round" />
+          <path d="M96 50 L104 62 L96 74 L88 62 L96 50 Z" fill="#9b87f5" />
+          <path d="M96 50 L104 62 L96 74 L88 62 L96 50 Z" stroke="#FFFFFF" stroke-width="1.5" stroke-linejoin="round" />
+        </svg>
+        <div class="logo-text">Skillship AI</div>
+      </div>
+      <div class="header-meta">
+        <span class="header-badge">Week 2 Playbook</span>
+        <span class="header-badge">AI Prompt Toolkit</span>
+      </div>
+      <h1>Problem Discovery &amp; User Need Identification Playbook</h1>
+      <p class="header-subtitle">Copy, customize, and validate your product ideas with guided AI prompts</p>
+      <p class="header-description">
+        This Git-style reference brings the Skillship AI Week 2 prompts into a polished, print-friendly page. Use it to
+        move from identifying user needs to validating your solution with confidence.
+      </p>
+      <div class="section-divider-thin"></div>
+    </div>
+
+    <!-- Table of Contents -->
+    <div class="toc no-print">
+      <h3>🚀 What's Inside This Template Collection</h3>
+      <ul>
+        <li>
+          <a href="#validation">
+            <span class="toc-icon">✅</span>
+            <span>Problem Validation Prompts</span>
+          </a>
+        </li>
+        <li>
+          <a href="#secondary-research">
+            <span class="toc-icon">📊</span>
+            <span>Secondary Research Prompts</span>
+          </a>
+        </li>
+        <li>
+          <a href="#user-research">
+            <span class="toc-icon">👥</span>
+            <span>User Research Prompts</span>
+          </a>
+        </li>
+        <li>
+          <a href="#primary-research">
+            <span class="toc-icon">🔍</span>
+            <span>Primary Research Guide &amp; Analysis</span>
+          </a>
+        </li>
+        <li>
+          <a href="#best-practices">
+            <span class="toc-icon">💡</span>
+            <span>Best Practices &amp; Usage Tips</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="cta-banner">
+      <h3>Level up your validation workflow</h3>
+      <p>
+        Start with the prompts in order, capture evidence in your problem journal, and reuse the templates with your
+        favorite AI assistant. You can print this playbook or keep it open as you iterate.
+      </p>
+    </div>
+
+    <div class="disclaimer">
+      <h3>📋 How to Use These Templates</h3>
+      <p>
+        These AI prompt templates are designed to accelerate your market research and problem validation process. Simply
+        <strong>copy any template</strong>, replace the
+        <span class="placeholder">[YOUR PROBLEM STATEMENT]</span> placeholders with your actual content, and paste into
+        your preferred AI tool (ChatGPT, Claude, Gemini, etc.).
+      </p>
+      <p>
+        <strong>Pro Tip:</strong> Don't just run the prompt once - iterate based on AI responses, ask follow-up
+        questions, and dive deeper into interesting insights. The magic happens in the conversation, not just the first
+        response.
+      </p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2 id="introduction">📝 Getting Started</h2>
+
+    <div class="story-box">
+      <h3>🎯 From Problem Statement to Market Validation</h3>
+      <p>
+        You've identified a problem using this format:
+        <strong>"[User/segment] is struggling with [problem] because [cause], which leads to [impact]"</strong>
+      </p>
+      <p>
+        Now what? These templates help you move from problem identification to deep market understanding. Each prompt is
+        designed to uncover specific insights that will either validate your problem or help you pivot to something more
+        promising.
+      </p>
+      <p>
+        <strong>Remember:</strong> The goal isn't to prove you're right - it's to discover the truth about your market
+        and users.
+      </p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- CATEGORY 1: PROBLEM VALIDATION -->
+    <h2 id="validation">✅ Problem Validation Prompts</h2>
+
+    <div class="prompt-box">
+      <h4 data-icon="🧠">Template 1: Root Cause Analysis (5 Whys)</h4>
+      <p>Ensure you're solving the root cause, not just symptoms.</p>
+      <div class="prompt-text" id="template1">Problem Statement: [YOUR PROBLEM STATEMENT]
+
+Conduct a thorough root cause analysis:
+1. Apply the 5 Whys methodology to dig deeper
+2. Identify if this is a symptom or root cause
+3. Map out the cause-and-effect chain
+4. Determine if solving this addresses the fundamental issue
+5. Suggest data points or user testimonials needed to validate root cause
+6. Provide credible sources and research links to support your analysis
+
+Provide multiple "why" chains if there could be different root causes. Include URLs to relevant research papers, articles, or data sources.</div>
+      <div class="prompt-actions">
+        <button class="copy-btn" onclick="copyPrompt('template1')">Copy Prompt</button>
+        <span class="copy-success" id="success1">Copied!</span>
+      </div>
+    </div>
+
+    <div class="prompt-box">
+      <h4 data-icon="🎯">Template 2: Problem-Solution Fit Assessment</h4>
+      <p>Get an honest evaluation of whether your problem is worth solving.</p>
+      <div class="prompt-text" id="template2">Problem Statement: [YOUR PROBLEM STATEMENT]
+
+Research Data Summary:
+[PASTE YOUR KEY RESEARCH FINDINGS]
+
+Evaluate problem-solution fit:
+1. Is this a problem worth solving? (Severity, frequency, willingness to pay)
+2. Is the market large enough? (TAM, SAM, SOM)
+3. Is the timing right? (Market trends, technology readiness)
+4. Are there alternative solutions that work well enough?
+5. What evidence supports that users would adopt a new solution?
+6. What are the biggest risks to problem-solution fit?
+7. On a scale of 1-10, how confident should I be in pursuing this?
+8. What additional validation is needed?
+9. Provide URLs to market reports, studies, or research that support your assessment
+
+Provide honest, critical assessment with credible sources and links.</div>
+      <div class="prompt-actions">
+        <button class="copy-btn" onclick="copyPrompt('template2')">Copy Prompt</button>
+        <span class="copy-success" id="success2">Copied!</span>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- CATEGORY 2: SECONDARY RESEARCH -->
+    <h2 id="secondary-research">📊 Secondary Research Prompts</h2>
+
+    <div class="prompt-box">
+      <h4 data-icon="📊">Template 3: Data &amp; Evidence Discovery</h4>
+      <p>Find data, statistics, and research that supports or challenges your problem.</p>
+      <div class="prompt-text" id="template3">Problem Statement: [YOUR PROBLEM STATEMENT]
+
+Help me find credible data and evidence about this problem:
+1. Find statistics, reports, and research studies that prove this problem exists
+2. What is the scale/magnitude of this problem? (number of affected users, financial impact, time lost, etc.)
+3. Identify trends over time (is this problem getting worse, better, or staying the same?)
+4. Find user testimonials, forum discussions, or social media conversations where people mention this problem
+5. Locate industry reports, market research, or academic papers related to this problem
+6. Provide URLs/links to all sources for verification
+
+For each data point, include:
+- The specific statistic or finding
+- Source name and credibility
+- Direct URL link to the source
+- Publication date/recency
+
+Focus on recent data (2020-2025) and credible sources.</div>
+      <div class="prompt-actions">
+        <button class="copy-btn" onclick="copyPrompt('template3')">Copy Prompt</button>
+        <span class="copy-success" id="success3">Copied!</span>
+      </div>
+    </div>
+
+    <div class="prompt-box">
+      <h4 data-icon="💹">Template 4: Market Size &amp; Opportunity Analysis</h4>
+      <p>Understand the total market potential with data sources.</p>
+      <div class="prompt-text" id="template4">Problem Statement: [YOUR PROBLEM STATEMENT]
+
+Please help me understand the market opportunity:
+1. What is the total addressable market (TAM) for this problem?
+2. What is the serviceable addressable market (SAM) - who can I realistically reach?
+3. What is the serviceable obtainable market (SOM) - what market share is achievable in year 1?
+4. What are the market trends related to this problem in India/globally?
+5. Provide specific data sources, statistics, and market research reports
+6. Include URLs to industry reports, market research firms, or government data
+
+Please structure your response with clear numbers, sources (with URLs), and realistic assumptions based on credible data.</div>
+      <div class="prompt-actions">
+        <button class="copy-btn" onclick="copyPrompt('template4')">Copy Prompt</button>
+        <span class="copy-success" id="success4">Copied!</span>
+      </div>
+    </div>
+
+    <div class="prompt-box">
+      <h4 data-icon="🧭">Template 5: Competitive Landscape Analysis</h4>
+      <p>Identify competitors with source links.</p>
+      <div class="prompt-text" id="template5">Problem Statement: [YOUR PROBLEM STATEMENT]
+
+Help me analyze the competitive landscape:
+1. Who are the direct competitors solving this problem? (Include company websites)
+2. Who are the indirect competitors (alternative solutions)?
+3. What are their key features, pricing, and target users?
+4. What are their strengths and weaknesses?
+5. What gaps exist in current solutions that I can exploit?
+6. Create a competitive positioning matrix
+7. Provide URLs to competitor websites, product pages, and recent reviews/articles about them
+8. Include links to competitor analysis reports or market research
+
+Focus on Indian market context where relevant, and provide credible source links for all competitor information.</div>
+      <div class="prompt-actions">
+        <button class="copy-btn" onclick="copyPrompt('template5')">Copy Prompt</button>
+        <span class="copy-success" id="success5">Copied!</span>
+      </div>
+    </div>
+
+    <div class="prompt-box">
+      <h4 data-icon="📈">Template 6: Industry &amp; Trend Analysis</h4>
+      <p>Understand trends with source documentation.</p>
+      <div class="prompt-text" id="template6">Problem Statement: [YOUR PROBLEM STATEMENT]
+
+Research and provide:
+1. Current industry trends (2024-2025) related to this problem
+2. Regulatory and legal considerations in India
+3. Technological advancements enabling solutions
+4. Social and behavioral shifts affecting this problem
+5. Economic factors influencing the market
+6. Expert opinions and thought leadership articles
+7. For each point, provide URLs to credible sources: industry reports, news articles, research papers, expert blogs
+
+Include recent data with proper source attribution and links for verification.</div>
+      <div class="prompt-actions">
+        <button class="copy-btn" onclick="copyPrompt('template6')">Copy Prompt</button>
+        <span class="copy-success" id="success6">Copied!</span>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- CATEGORY 3: USER RESEARCH -->
+    <h2 id="user-research">👥 User Research Prompts</h2>
+
+    <div class="prompt-box">
+      <h4 data-icon="👤">Template 7: User Persona Development</h4>
+      <p>Create detailed, research-backed user personas.</p>
+      <div class="prompt-text" id="template7">Problem Statement: [YOUR PROBLEM STATEMENT]
+
+Help me create detailed user personas:
+1. Identify 3 different user segments facing this problem
+2. For each segment, provide:
+   - Demographics (age, location, income, education)
+   - Psychographics (values, motivations, lifestyle)
+   - Behavioral patterns (how they currently solve this problem)
+   - Pain points and frustrations
+   - Goals and desired outcomes
+   - Technology adoption level
+   - Buying triggers and decision factors
+3. Include references to research studies or demographic data that support these persona characteristics
+4. Provide URLs to relevant market research or demographic reports
+
+Make personas realistic and India-specific where applicable, backed by actual market data.</div>
+      <div class="prompt-actions">
+        <button class="copy-btn" onclick="copyPrompt('template7')">Copy Prompt</button>
+        <span class="copy-success" id="success7">Copied!</span>
+      </div>
+    </div>
+
+    <div class="prompt-box">
+      <h4 data-icon="🔍">Template 8: User Behavior &amp; Motivation Analysis</h4>
+      <p>Understand what drives your users and their current behaviors.</p>
+      <div class="prompt-text" id="template8">Problem Statement: [YOUR PROBLEM STATEMENT]
+
+Help me understand user behavior and motivation:
+1. What are the key behaviors users exhibit related to this problem?
+2. What motivates users to seek a solution? (functional, emotional, social drivers)
+3. What triggers users to look for solutions right now?
+4. What are the barriers preventing users from solving this problem?
+5. How do users currently cope with or work around this problem?
+6. What are the "jobs" users are trying to get done? (functional, emotional, social)
+7. What would make users switch from their current solution to a new one?
+8. Provide links to behavioral research, psychology studies, or user behavior reports relevant to this problem
+
+Include credible sources and research URLs to support behavioral insights.</div>
+      <div class="prompt-actions">
+        <button class="copy-btn" onclick="copyPrompt('template8')">Copy Prompt</button>
+        <span class="copy-success" id="success8">Copied!</span>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- CATEGORY 4: PRIMARY RESEARCH GUIDE -->
+    <h2 id="primary-research">🔍 Primary Research: Design, Conduct &amp; Analyze</h2>
+
+    <div class="prompt-box">
+      <h4 data-icon="🗣️">Template 9: User Interview Guide Design</h4>
+      <p>Design comprehensive user interview questions following best practices.</p>
+      <div class="prompt-text" id="template9">Problem Statement: [YOUR PROBLEM STATEMENT]
+
+Create a comprehensive user interview guide:
+1. Opening questions (5) - Build rapport and context
+2. Experience questions (8-10) - Understand current behavior and past experiences
+3. Pain point questions (5-7) - Uncover frustrations and challenges
+4. Motivation questions (5) - Understand why they behave the way they do
+5. Solution exploration (3-5) - Test receptiveness without leading
+6. Closing questions (2-3) - Open-ended insights
+
+For each question, provide:
+- The exact question to ask
+- What you're trying to learn
+- Follow-up probes if needed
+- Common pitfalls to avoid
+
+Ensure questions are open-ended and unbiased (following The Mom Test principles). Include best practices from user research methodologies.</div>
+      <div class="prompt-actions">
+        <button class="copy-btn" onclick="copyPrompt('template9')">Copy Prompt</button>
+        <span class="copy-success" id="success9">Copied!</span>
+      </div>
+    </div>
+
+    <div class="prompt-box">
+      <h4 data-icon="🤝">Template 10: Conducting User Interviews - Best Practices</h4>
+      <p>Learn how to conduct effective user interviews.</p>
+      <div class="prompt-text" id="template10">Problem Statement: [YOUR PROBLEM STATEMENT]
+
+I'm preparing to conduct user interviews. Provide guidance on:
+
+**Before the Interview:**
+1. How to recruit the right participants?
+2. What to prepare (materials, tools, scripts)?
+3. How to schedule and set expectations?
+
+**During the Interview:**
+1. How to build rapport and make users comfortable?
+2. How to ask unbiased questions that reveal truth?
+3. What body language and tone to use?
+4. How to handle difficult or shy participants?
+5. How to dig deeper without leading?
+6. What red flags indicate biased responses?
+
+**Interview Best Practices:**
+1. The Mom Test principles - avoid leading questions
+2. How to listen more than you talk
+3. When to ask "why" and when not to
+4. How to document insights during interviews
+
+Provide practical, actionable advice with examples.</div>
+      <div class="prompt-actions">
+        <button class="copy-btn" onclick="copyPrompt('template10')">Copy Prompt</button>
+        <span class="copy-success" id="success10">Copied!</span>
+      </div>
+    </div>
+
+    <div class="prompt-box">
+      <h4 data-icon="🧩">Template 11: Analyzing Interview Results</h4>
+      <p>Extract patterns and actionable insights from your interview data.</p>
+      <div class="prompt-text" id="template11">Problem Statement: [YOUR PROBLEM STATEMENT]
+
+I conducted [NUMBER] user interviews. Here are my notes:
+[PASTE YOUR INTERVIEW NOTES/QUOTES]
+
+Please help me analyze these interviews:
+
+**Pattern Recognition:**
+1. What are the common themes across interviews?
+2. What pain points are mentioned most frequently?
+3. What surprising or unexpected insights emerged?
+4. Are there contradictions or conflicting viewpoints?
+
+**Insight Extraction:**
+1. What are the stated needs (what users say they want)?
+2. What are the unstated needs (what users actually need)?
+3. What emotional drivers are present?
+4. What workarounds or hacks are users currently using?
+
+**Segmentation:**
+1. Can you identify different user segments based on responses?
+2. What characterizes each segment?
+3. Which segment(s) feel the pain most acutely?
+
+**Validation Assessment:**
+1. Does this data validate my problem statement?
+2. What should I change or pivot based on these insights?
+3. What additional questions do I need to ask?
+4. How many more interviews do I need?
+
+**Actionable Next Steps:**
+Provide specific recommendations on what to do with these insights.
+
+Structure your analysis with direct quotes supporting each theme.</div>
+      <div class="prompt-actions">
+        <button class="copy-btn" onclick="copyPrompt('template11')">Copy Prompt</button>
+        <span class="copy-success" id="success11">Copied!</span>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2 id="best-practices">💡 Best Practices &amp; Pro Tips</h2>
+
+    <div class="tip-box">
+      <h3>🚀 How to Get the Most from These Templates</h3>
+      <ul>
+        <li><strong>Start with validation:</strong> Use Problem Validation prompts first to ensure you're solving a real problem</li>
+        <li><strong>Gather evidence:</strong> Use Secondary Research to find data that supports or challenges your assumptions</li>
+        <li><strong>Understand users deeply:</strong> Use User Research prompts to build empathy and understanding</li>
+        <li><strong>Go talk to real users:</strong> Use Primary Research guides to conduct interviews and validate with real people</li>
+        <li><strong>Always ask for sources:</strong> Request URLs and links to verify AI-provided information</li>
+        <li><strong>Iterate and refine:</strong> Use AI responses to create follow-up questions and deeper prompts</li>
+        <li><strong>Cross-validate insights:</strong> Use multiple templates to verify important findings</li>
+        <li><strong>Question the AI:</strong> Challenge assumptions and request clarification</li>
+        <li><strong>Document everything:</strong> Keep all responses organized for easy reference</li>
+      </ul>
+    </div>
+
+    <div class="think-box">
+      <h3>⚠️ Important Reminders</h3>
+      <ul>
+        <li><strong>AI is a research assistant, not an oracle:</strong> Always validate AI insights with real data and user conversations</li>
+        <li><strong>Replace ALL placeholders:</strong> Don't leave any <span class="placeholder">[BRACKETS]</span> in your final prompts</li>
+        <li><strong>Verify sources:</strong> Check that provided URLs are real and credible</li>
+        <li><strong>Stay objective:</strong> Seek honest, critical feedback - don't look for validation</li>
+        <li><strong>Primary research is essential:</strong> No amount of secondary research replaces talking to real users</li>
+      </ul>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="story-box">
+      <h2>🚀 Ready to Validate Your Ideas?</h2>
+      <p>You now have 11 powerful AI prompt templates organized into a clear workflow:</p>
+      
+      <ol>
+        <li><strong>Validate the Problem</strong> - Is this worth solving?</li>
+        <li><strong>Research the Market</strong> - What does the data say?</li>
+        <li><strong>Understand Users</strong> - Who are they and what drives them?</li>
+        <li><strong>Conduct Primary Research</strong> - Talk to real people and analyze findings</li>
+      </ol>
+
+      <p><strong>Your workflow:</strong></p>
+      <ol>
+        <li>Start with Template 1 &amp;2 (Problem Validation)</li>
+        <li>Use Templates 3-6 (Secondary Research) to gather data</li>
+        <li>Apply Templates 7-8 (User Research) to understand your audience</li>
+        <li>Follow Templates 9-11 (Primary Research) to validate with real users</li>
+        <li>Document all insights for your assignment!</li>
+      </ol>
+
+      <p>Happy researching! 📊✨</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="footer">
+      <p><strong>© 2025 Skillship AI</strong></p>
+      <p>Empowering Future Product Managers</p>
+      <p style="margin-top: 12px;">Ready to validate ideas that matter? Let's make it happen! 🌱</p>
+    </div>
+
+    <script>
+      // Get elements
+      const backToTopButton = document.getElementById('backToTop');
+      const navMenuBtn = document.getElementById('navMenuBtn');
+      const floatingNavMenu = document.getElementById('floatingNavMenu');
+      const sections = document.querySelectorAll('h2[id]');
+      const navLinks = document.querySelectorAll('.floating-nav-menu a');
+
+      // Copy prompt function
+      function copyPrompt(templateId) {
+        const promptTextElement = document.getElementById(templateId);
+        if (!promptTextElement) return;
+
+        const promptText = promptTextElement.textContent;
+
+        const revealSuccess = () => {
+          const successId = templateId.replace('template', 'success');
+          const successElement = document.getElementById(successId);
+          if (!successElement) return;
+
+          successElement.classList.add('show');
+          setTimeout(() => {
+            successElement.classList.remove('show');
+          }, 2200);
+        };
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(promptText).then(revealSuccess).catch(() => {
+            fallbackCopy(promptText, revealSuccess);
+          });
+        } else {
+          fallbackCopy(promptText, revealSuccess);
+        }
+      }
+
+      function fallbackCopy(text, onSuccess) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.setAttribute('readonly', '');
+        textarea.style.position = 'absolute';
+        textarea.style.left = '-9999px';
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+          document.execCommand('copy');
+          if (typeof onSuccess === 'function') {
+            onSuccess();
+          }
+        } catch (error) {
+          console.error('Copy failed', error);
+        }
+
+        document.body.removeChild(textarea);
+      }
+
+      // Back to Top Button - Show/Hide based on scroll
+      window.addEventListener('scroll', function () {
+        if (window.pageYOffset > 300) {
+          backToTopButton.classList.add('show');
+        } else {
+          backToTopButton.classList.remove('show');
+        }
+
+        // Highlight active section
+        updateActiveSection();
+      });
+
+      // Scroll to top function
+      function scrollToTop() {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
+      }
+
+      // Toggle Navigation Menu
+      function toggleNavMenu() {
+        floatingNavMenu.classList.toggle('show');
+        navMenuBtn.classList.toggle('active');
+
+        // Change icon when open
+        if (floatingNavMenu.classList.contains('show')) {
+          navMenuBtn.innerHTML = '✕';
+        } else {
+          navMenuBtn.innerHTML = '☰';
+        }
+      }
+
+      // Close menu when clicking outside
+      document.addEventListener('click', function (event) {
+        if (
+          !floatingNavMenu.contains(event.target) &&
+          !navMenuBtn.contains(event.target) &&
+          floatingNavMenu.classList.contains('show')
+        ) {
+          toggleNavMenu();
+        }
+      });
+
+      // Highlight active section in navigation
+      function updateActiveSection() {
+        let current = '';
+
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop;
+          if (window.pageYOffset >= sectionTop - 100) {
+            current = section.getAttribute('id');
+          }
+        });
+
+        navLinks.forEach((link) => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + current) {
+            link.classList.add('active');
+          }
+        });
+      }
+
+      // Smooth scroll for navigation links
+      navLinks.forEach((anchor) => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start',
+            });
+
+            // Close menu after clicking
+            if (floatingNavMenu.classList.contains('show')) {
+              toggleNavMenu();
+            }
+          }
+        });
+      });
+
+      // Close menu with Escape key
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && floatingNavMenu.classList.contains('show')) {
+          toggleNavMenu();
+        }
+      });
+
+      // Initialize active section on load
+      updateActiveSection();
+    </script>
+  
+
+</body></html>
