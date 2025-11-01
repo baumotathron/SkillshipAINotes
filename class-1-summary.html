@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Skillship AI – Class 1 Summary, Notes &amp; Prompts</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 40px 60px;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+          sans-serif;
+        line-height: 1.8;
+        color: #1a1a1a;
+        background-color: #ffffff;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      @media print {
+        body {
+          padding: 20px;
+        }
+        .no-print {
+          display: none;
+        }
+        .page-break {
+          page-break-before: always;
+        }
+      }
+
+      .header {
+        text-align: left;
+        margin-bottom: 48px;
+        padding-bottom: 24px;
+        border-bottom: 3px solid #000;
+      }
+
+      .logo-section {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 20px;
+      }
+
+      .logo-icon {
+        width: 48px;
+        height: 48px;
+      }
+
+      .logo-text {
+        font-size: 1.4em;
+        font-weight: 700;
+        background: linear-gradient(135deg, #886df2 0%, #9b87f5 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        letter-spacing: -0.5px;
+      }
+
+      .header h1 {
+        font-size: 2em;
+        font-weight: 700;
+        margin-bottom: 12px;
+        background: linear-gradient(135deg, #886df2 0%, #9b87f5 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .header h2 {
+        font-size: 1.2em;
+        font-weight: 400;
+        color: #4a4a4a;
+        line-height: 1.4;
+      }
+
+      .header-badges {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 16px;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 16px;
+        border-radius: 999px;
+        background: linear-gradient(
+          135deg,
+          rgba(136, 109, 242, 0.14) 0%,
+          rgba(155, 135, 245, 0.2) 100%
+        );
+        color: #5b4cc6;
+        font-size: 0.85em;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        color: #000;
+        page-break-after: avoid;
+      }
+
+      h2 {
+        font-size: 1.8em;
+        margin-top: 56px;
+        margin-bottom: 24px;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+        background: linear-gradient(135deg, #886df2 0%, #9b87f5 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      h3 {
+        font-size: 1.3em;
+        margin-top: 32px;
+        margin-bottom: 16px;
+        font-weight: 600;
+      }
+
+      h4 {
+        font-size: 1.1em;
+        margin-top: 24px;
+        margin-bottom: 12px;
+        font-weight: 600;
+        color: #333;
+      }
+
+      p {
+        margin-bottom: 16px;
+        color: #1a1a1a;
+        line-height: 1.8;
+      }
+
+      ul,
+      ol {
+        margin: 16px 0;
+        padding-left: 28px;
+      }
+
+      li {
+        margin-bottom: 12px;
+        line-height: 1.7;
+      }
+
+      ul li::marker {
+        color: #9b87f5;
+      }
+
+      ol li::marker {
+        color: #886df2;
+        font-weight: 600;
+      }
+
+      .section-divider {
+        width: 100%;
+        height: 2px;
+        background: #e0e0e0;
+        margin: 48px 0;
+      }
+
+      .section-divider-thin {
+        width: 80%;
+        height: 1px;
+        background: linear-gradient(to right, transparent, #d0d0d0, transparent);
+        margin: 32px auto;
+      }
+
+      .disclaimer,
+      .story-box,
+      .framework-box,
+      .example-box,
+      .tip-box {
+        border-radius: 12px;
+        padding: 28px;
+        margin: 28px 0;
+        page-break-inside: avoid;
+      }
+
+      .disclaimer {
+        background-color: #f5f5f5;
+        border-left: 4px solid #666;
+      }
+
+      .story-box {
+        background-color: #fafafa;
+        border: 1px solid #e0e0e0;
+      }
+
+      .framework-box {
+        background-color: #fff;
+        border: 2px solid #e8e8e8;
+      }
+
+      .example-box {
+        background-color: #f9f9f9;
+        border-left: 4px solid #333;
+      }
+
+      .tip-box {
+        background-color: #f0f8f0;
+        border-left: 4px solid #2e7d32;
+      }
+
+      .quote {
+        font-style: italic;
+        color: #444;
+        border-left: 4px solid #9b87f5;
+        padding-left: 18px;
+        margin: 24px 0;
+      }
+
+      .observation-grid {
+        display: grid;
+        gap: 24px;
+      }
+
+      @media (min-width: 768px) {
+        .observation-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      .observation-card {
+        border-radius: 12px;
+        border: 1px solid rgba(136, 109, 242, 0.25);
+        background: linear-gradient(
+          135deg,
+          rgba(136, 109, 242, 0.05) 0%,
+          rgba(155, 135, 245, 0.06) 100%
+        );
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .observation-card h4 {
+        margin: 0;
+        color: #5b4cc6;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 24px 0;
+      }
+
+      table th,
+      table td {
+        border: 1px solid #dcdcdc;
+        padding: 16px;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      table th {
+        background: rgba(136, 109, 242, 0.1);
+        color: #5b4cc6;
+        font-weight: 600;
+      }
+
+      .floating-buttons {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        z-index: 1000;
+      }
+
+      .nav-menu-btn,
+      .back-to-top {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        border: none;
+        color: #fff;
+        font-size: 24px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .nav-menu-btn {
+        background: linear-gradient(135deg, #886df2 0%, #9b87f5 100%);
+      }
+
+      .nav-menu-btn:hover {
+        transform: scale(1.08);
+        box-shadow: 0 6px 18px rgba(136, 109, 242, 0.35);
+      }
+
+      .back-to-top {
+        background-color: #333;
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .back-to-top.show {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .back-to-top:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .floating-nav-menu {
+        position: fixed;
+        bottom: 100px;
+        right: 30px;
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+        padding: 20px;
+        min-width: 280px;
+        max-width: 320px;
+        max-height: 70vh;
+        overflow-y: auto;
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(20px);
+        transition: all 0.3s ease;
+      }
+
+      .floating-nav-menu.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .floating-nav-menu h4 {
+        margin: 0 0 16px;
+        padding-bottom: 12px;
+        border-bottom: 2px solid #e0e0e0;
+        font-size: 1.05em;
+      }
+
+      .floating-nav-menu a {
+        display: block;
+        padding: 10px 12px;
+        border-radius: 8px;
+        color: #555;
+        text-decoration: none;
+        transition: background 0.2s ease, padding-left 0.2s ease;
+      }
+
+      .floating-nav-menu a:hover {
+        background-color: rgba(136, 109, 242, 0.1);
+        color: #000;
+        padding-left: 16px;
+      }
+
+      .floating-nav-menu a.active {
+        background: linear-gradient(135deg, #886df2 0%, #9b87f5 100%);
+        color: #fff;
+        font-weight: 500;
+      }
+
+      .toc {
+        background: linear-gradient(
+          135deg,
+          rgba(136, 109, 242, 0.05) 0%,
+          rgba(155, 135, 245, 0.08) 100%
+        );
+        padding: 32px;
+        border-radius: 12px;
+        border: 2px solid rgba(155, 135, 245, 0.6);
+        margin: 32px 0;
+        box-shadow: 0 16px 32px rgba(136, 109, 242, 0.12);
+      }
+
+      .toc h3 {
+        margin-bottom: 20px;
+        color: #5b4cc6;
+      }
+
+      .toc ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .toc li {
+        margin-bottom: 12px;
+      }
+
+      .toc a {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: inherit;
+        text-decoration: none;
+        padding: 8px 12px;
+        border-radius: 8px;
+        transition: background 0.2s ease, transform 0.2s ease;
+      }
+
+      .toc a:hover {
+        background-color: rgba(136, 109, 242, 0.12);
+        transform: translateX(4px);
+      }
+
+      .footer {
+        text-align: center;
+        margin-top: 64px;
+        padding-top: 32px;
+        border-top: 2px solid #e0e0e0;
+        color: #666;
+        font-size: 0.9em;
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding: 24px 20px;
+        }
+
+        .floating-buttons {
+          bottom: 20px;
+          right: 20px;
+        }
+
+        .nav-menu-btn,
+        .back-to-top {
+          width: 50px;
+          height: 50px;
+          font-size: 20px;
+        }
+
+        .floating-nav-menu {
+          right: 20px;
+          bottom: 85px;
+          min-width: 260px;
+          max-width: calc(100vw - 40px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="floating-nav-menu" id="floatingNavMenu">
+      <h4>📑 Quick Navigation</h4>
+      <ul>
+        <li><a href="#top">🏠 Overview</a></li>
+        <li><a href="#product-vs-service">🆚 Product vs Service</a></li>
+        <li><a href="#what-is-pm">🚀 What is Product Management?</a></li>
+        <li><a href="#pm-role">🤾 Who is a Product Manager?</a></li>
+        <li><a href="#company-types">🏢 PM Across Company Types</a></li>
+        <li><a href="#problem-identification">🧩 Identifying Problems</a></li>
+      </ul>
+    </div>
+
+    <div class="floating-buttons">
+      <button
+        class="nav-menu-btn"
+        id="navMenuBtn"
+        onclick="toggleNavMenu()"
+        title="Navigation Menu"
+      >
+        ☰
+      </button>
+      <button
+        class="back-to-top"
+        id="backToTop"
+        onclick="scrollToTop()"
+        title="Back to top"
+      >
+        ↑
+      </button>
+    </div>
+
+    <div class="header" id="top">
+      <div class="logo-section">
+        <img src="svglogo4.svg" alt="Skillship AI Logo" class="logo-icon" />
+        <div class="logo-text">Skillship AI</div>
+      </div>
+      <h1>Class 1 Summary, Notes &amp; Prompts</h1>
+      <h2>Understanding product management and learning to identify problems</h2>
+      <div class="header-badges">
+        <span class="badge">Week 1 Foundations</span>
+        <span class="badge">Product Thinking</span>
+        <span class="badge">Skillship AI Live Cohort</span>
+      </div>
+      <div class="section-divider-thin"></div>
+    </div>
+
+    <div class="toc no-print">
+      <h3>🚀 What you’ll find in this summary</h3>
+      <ul>
+        <li><a href="#story">🌟 PM Mindset Story</a></li>
+        <li><a href="#product-vs-service">🆚 Product vs Service Fundamentals</a></li>
+        <li><a href="#what-is-pm">🚀 What is Product Management?</a></li>
+        <li><a href="#pm-role">🤾 Product Manager in Action</a></li>
+        <li><a href="#company-types">🏢 PM Across Company Types</a></li>
+        <li><a href="#problem-identification">🧩 Identifying High-Impact Problems</a></li>
+      </ul>
+    </div>
+
+    <div class="disclaimer">
+      <h3>📋 Session Context</h3>
+      <p>
+        These notes capture the core ideas from Skillship AI’s first live
+        session. Revisit them before interviews, assignments, or whenever you
+        need to reset your product thinking mindset. Scribble in the margins,
+        annotate digitally, and keep refining your understanding as you build.
+      </p>
+    </div>
+
+    <div class="story-box" id="story">
+      <h2>🌟 A Story to Anchor Your Product Thinking</h2>
+      <p>
+        It’s a Saturday afternoon. You open Swiggy and within minutes your
+        biryani arrives — no phone calls, no waiting in line, just a seamless
+        flow from craving to delight. Behind that simplicity is a web of
+        product decisions made by a Product Manager: prioritising features,
+        sweating the user journey, balancing business goals with user delight.
+      </p>
+      <p>
+        The difference between the apps you love and the ones you abandon comes
+        down to product thinking. PMs keep asking “why”, iterate relentlessly,
+        and ensure the seamless experience happens more often than the
+        frustrating one.
+      </p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2 id="product-vs-service">🆚 Product vs Service</h2>
+    <div class="framework-box">
+      <h3>Core Distinctions</h3>
+      <ul>
+        <li>
+          <strong>Product:</strong> Standardised offering with consistent pricing
+          and usage. Low variable cost, automation-driven, tangible (physical or
+          digital). Examples: Swiggy app, iPhone, ChatGPT.
+        </li>
+        <li>
+          <strong>Service:</strong> Custom, human-driven, higher variable cost.
+          Personalised experiences with higher ticket sizes. Examples:
+          consulting, delivery, teaching.
+        </li>
+      </ul>
+      <div class="example-box">
+        <h4>Core Idea</h4>
+        <ul>
+          <li><strong>Product →</strong> Scalable, repeatable, automated value.</li>
+          <li><strong>Service →</strong> Personalised, expertise-based human value.</li>
+        </ul>
+      </div>
+      <p>
+        AI increasingly blurs this line. Personalised Spotify playlists or
+        Canva’s auto-generated designs make products feel like services, while
+        traditionally human-led services adopt automation to scale thoughtfully.
+      </p>
+    </div>
+
+    <h2 id="what-is-pm">🚀 What is Product Management?</h2>
+    <div class="framework-box">
+      <h3>The Practice</h3>
+      <p>
+        Product Management is the art and science of solving meaningful problems
+        at the intersection of business, design, and technology — think of it as
+        managing a digital <em>dhandha</em>.
+      </p>
+      <p>A Product Manager constantly answers three core questions:</p>
+      <ol>
+        <li>Who is our user?</li>
+        <li>What problem are we solving?</li>
+        <li>How will we know it worked?</li>
+      </ol>
+      <h3>Seven Critical Functions</h3>
+      <ol>
+        <li>Define the problem</li>
+        <li>Research the market and users</li>
+        <li>Frame compelling solutions</li>
+        <li>Design the product experience (UI/UX)</li>
+        <li>Partner with engineering to build</li>
+        <li>Collaborate on marketing &amp; go-to-market</li>
+        <li>Measure outcomes and iterate</li>
+      </ol>
+      <div class="example-box">
+        <h4>Swiggy: Grounding in Reality</h4>
+        <ul>
+          <li><strong>Problem:</strong> Ordering food easily.</li>
+          <li>
+            <strong>Solution:</strong> One app that consolidates menus, payments,
+            and real-time delivery tracking.
+          </li>
+          <li>
+            <strong>PM’s Contribution:</strong> Aligns design, engineering,
+            marketing, and strategy on the same user promise.
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 id="pm-role">🤾 Who is a Product Manager?</h2>
+    <div class="framework-box">
+      <p>
+        A PM is a “salaried founder” — accountable for the product’s success as
+        if it were their own company. They translate user needs into actionable
+        work, orchestrate cross-functional collaboration, and guard the user’s
+        voice.
+      </p>
+      <div class="example-box">
+        <h4>How PMs Show Up</h4>
+        <ul>
+          <li>A translator between users and developers.</li>
+          <li>A strategist ensuring the business case is strong.</li>
+          <li>A captain steering execution across teams.</li>
+          <li>A lawyer advocating for the user’s lived reality.</li>
+        </ul>
+      </div>
+
+      <h3>Case Study 1 – Zomato</h3>
+      <ul>
+        <li><strong>Business Goal:</strong> Increase monthly orders.</li>
+        <li>
+          <strong>User Problem:</strong> Surge pricing feels unpredictable and
+          unfair.
+        </li>
+        <li>
+          <strong>PM Actions:</strong> Dive into data, interview users, define a
+          trust-enhancing goal, ship Zomato Gold, coordinate launch.
+        </li>
+        <li><strong>Outcome:</strong> Higher retention and satisfaction.</li>
+      </ul>
+
+      <h3>Case Study 2 – YouTube</h3>
+      <ul>
+        <li><strong>Business Goal:</strong> Improve creator retention.</li>
+        <li>
+          <strong>User Problem:</strong> Emerging creators feel unheard and
+          demotivated.
+        </li>
+        <li>
+          <strong>PM Actions:</strong> Analyse drop-off moments, co-create
+          milestone badges, iterate on analytics insights.
+        </li>
+        <li><strong>Outcome:</strong> 25% uplift in new-creator retention.</li>
+      </ul>
+    </div>
+
+    <h2 id="company-types">🏢 PM Role Across Company Types</h2>
+    <div class="framework-box">
+      <p>
+        Product leadership flexes differently across company maturity. Adapt
+        your playbook to the operating context.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>PM Style</th>
+            <th>Characteristics</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Startup</td>
+            <td>Strategy-Driven</td>
+            <td>Fast, chaotic, deeply user-facing.</td>
+            <td>PM in a 5-member AI startup racing to MVP.</td>
+          </tr>
+          <tr>
+            <td>Mid-Size</td>
+            <td>Balance-Driven</td>
+            <td>Mix of process, experimentation, and data.</td>
+            <td>PM at Zomato managing merchant experiences.</td>
+          </tr>
+          <tr>
+            <td>Enterprise</td>
+            <td>Process-Driven</td>
+            <td>Structured, analytics-heavy, stakeholder-rich.</td>
+            <td>PM at Amazon defining Prime Video metrics.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="problem-identification">🧩 Identifying Problems for Product Ideas</h2>
+    <div class="framework-box">
+      <div class="quote">
+        “Before a great product is built, a great problem is understood.”
+      </div>
+      <h3>Mindsets of a Problem Identifier</h3>
+      <ul>
+        <li>
+          <strong>Start from pain, not product:</strong> Ask why people are
+          frustrated before sketching solutions.
+        </li>
+        <li>
+          <strong>Spot inefficiencies and workarounds:</strong> Every complaint
+          hides an opportunity.
+        </li>
+        <li>
+          <strong>Track patterns:</strong> Repeated friction across contexts is
+          a strong signal.
+        </li>
+        <li>
+          <strong>Zoom out:</strong> Validate that the problem scales beyond a
+          personal inconvenience.
+        </li>
+      </ul>
+
+      <h3>Observation Arenas</h3>
+      <div class="observation-grid">
+        <div class="observation-card">
+          <h4>🏠 Daily Life</h4>
+          <p>
+            Audit your routines. What feels unnecessarily hard, confusing, or
+            repetitive?
+          </p>
+          <ul>
+            <li>
+              Forgetting to water plants → behavioural design opportunity using
+              sensors/reminders.
+            </li>
+            <li>
+              Decision fatigue at dinner → AI meal planners grounded in your
+              pantry.
+            </li>
+          </ul>
+        </div>
+
+        <div class="observation-card">
+          <h4>🧑‍🤝‍🧑 Society &amp; Communities</h4>
+          <p>
+            Notice who is underserved or excluded from mainstream experiences.
+          </p>
+          <ul>
+            <li>
+              Seniors lost in payment apps → voice-first, high-contrast design
+              flows.
+            </li>
+            <li>
+              Rural students lacking specialists → regional-language AI tutors.
+            </li>
+          </ul>
+        </div>
+
+        <div class="observation-card">
+          <h4>🏫 Institutions</h4>
+          <p>
+            Schools, hospitals, banks — process debt everywhere.
+          </p>
+          <ul>
+            <li>
+              Hospital queues for registration → WhatsApp token automation.
+            </li>
+            <li>
+              University approval loops → digital workflows and traceability.
+            </li>
+          </ul>
+        </div>
+
+        <div class="observation-card">
+          <h4>💼 Workplaces &amp; Businesses</h4>
+          <p>
+            Look for repeated manual work, broken feedback loops, or data gaps.
+          </p>
+          <ul>
+            <li>
+              Retail store reconciliation → auto-syncing sales dashboards.
+            </li>
+            <li>
+              Agencies juggling five tools → unified client collaboration.
+            </li>
+          </ul>
+        </div>
+
+        <div class="observation-card">
+          <h4>🌐 Global &amp; Market Trends</h4>
+          <p>
+            Study macro shifts to find the next wave of unmet needs.
+          </p>
+          <ul>
+            <li>
+              AI-generated misinformation → credibility-scoring browser
+              companions.
+            </li>
+            <li>
+              Remote work loneliness → virtual co-working that brings back
+              social energy.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="tip-box">
+      <h3>📒 Practice Prompts</h3>
+      <p>
+        Use these reflection starters to keep sharpening your instincts between
+        classes:
+      </p>
+      <ul>
+        <li>
+          List three problems you noticed today. What are the root causes? Who
+          else experiences them?
+        </li>
+        <li>
+          Pick a popular app. Where does it delight? Where does it frustrate?
+          Draft a mini 5-Whys.
+        </li>
+        <li>
+          Interview someone outside your demographic. What grids or workarounds
+          do they rely on to get things done?
+        </li>
+        <li>
+          Track a business workflow end-to-end. Where do people jump to Excel or
+          WhatsApp? Why?
+        </li>
+      </ul>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="footer">
+      <p><strong>© 2025 Skillship AI</strong></p>
+      <p>Empowering future product leaders.</p>
+      <p style="margin-top: 12px;">Keep observing. Keep asking why. 🌱</p>
+    </div>
+
+    <script>
+      const backToTopButton = document.getElementById('backToTop');
+      const navMenuBtn = document.getElementById('navMenuBtn');
+      const floatingNavMenu = document.getElementById('floatingNavMenu');
+      const sections = document.querySelectorAll('h2[id]');
+      const navLinks = document.querySelectorAll('.floating-nav-menu a');
+
+      window.addEventListener('scroll', function () {
+        if (window.pageYOffset > 300) {
+          backToTopButton.classList.add('show');
+        } else {
+          backToTopButton.classList.remove('show');
+        }
+        updateActiveSection();
+      });
+
+      function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      function toggleNavMenu() {
+        floatingNavMenu.classList.toggle('show');
+        navMenuBtn.classList.toggle('active');
+        navMenuBtn.innerHTML = floatingNavMenu.classList.contains('show')
+          ? '✕'
+          : '☰';
+      }
+
+      document.addEventListener('click', function (event) {
+        if (
+          !floatingNavMenu.contains(event.target) &&
+          !navMenuBtn.contains(event.target) &&
+          floatingNavMenu.classList.contains('show')
+        ) {
+          toggleNavMenu();
+        }
+      });
+
+      function updateActiveSection() {
+        let current = '';
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop;
+          if (window.pageYOffset >= sectionTop - 120) {
+            current = section.getAttribute('id');
+          }
+        });
+
+        navLinks.forEach((link) => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + current) {
+            link.classList.add('active');
+          }
+        });
+      }
+
+      navLinks.forEach((anchor) => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            if (floatingNavMenu.classList.contains('show')) {
+              toggleNavMenu();
+            }
+          }
+        });
+      });
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && floatingNavMenu.classList.contains('show')) {
+          toggleNavMenu();
+        }
+      });
+
+      updateActiveSection();
+    </script>
+  </body>
+</html>
+
