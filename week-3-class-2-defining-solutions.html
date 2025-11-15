@@ -1,0 +1,1875 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skillship AI – Week 3, Class 2: Defining Solutions</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background-color: #ffffff;
+      color: #1a1a1a;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar Navigation (30%) */
+    .sidebar {
+      width: 30%;
+      min-width: 260px;
+      max-width: 320px;
+      background: linear-gradient(180deg, #f8f7ff 0%, #ffffff 100%);
+      border-right: 2px solid rgba(136, 109, 242, 0.15);
+      padding: 20px 16px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      z-index: 100;
+    }
+
+    .sidebar-header {
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid rgba(136, 109, 242, 0.2);
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+    }
+
+    .logo-text {
+      font-size: 1.1em;
+      font-weight: 700;
+      background: linear-gradient(135deg, #886df2 0%, #9b87f5 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.5px;
+    }
+
+    .sidebar-title {
+      font-size: 0.95em;
+      font-weight: 600;
+      color: #2f2f2f;
+      margin-bottom: 6px;
+    }
+
+    .sidebar-subtitle {
+      font-size: 0.8em;
+      color: #666;
+      line-height: 1.4;
+    }
+
+    .nav-menu {
+      list-style: none;
+      padding: 0;
+    }
+
+    .nav-menu li {
+      margin-bottom: 4px;
+    }
+
+    .nav-menu a {
+      display: block;
+      padding: 8px 12px;
+      color: #555;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 0.85em;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      border-left: 3px solid transparent;
+    }
+
+    .nav-menu a:hover {
+      background-color: rgba(136, 109, 242, 0.08);
+      color: #5b4cc6;
+      padding-left: 16px;
+    }
+
+    .nav-menu a.active {
+      background: linear-gradient(135deg, rgba(136, 109, 242, 0.12) 0%, rgba(155, 135, 245, 0.08) 100%);
+      color: #5b4cc6;
+      border-left-color: #9b87f5;
+      font-weight: 600;
+    }
+
+    .nav-section {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(136, 109, 242, 0.1);
+    }
+
+    .nav-section-title {
+      font-size: 0.7em;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #9b87f5;
+      font-weight: 700;
+      margin-bottom: 8px;
+      padding-left: 12px;
+    }
+
+    /* Main Content Area (70%) */
+    .main-content {
+      flex: 1;
+      max-width: calc(100% - 320px);
+      padding: 28px 36px;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .header {
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 2px solid #000;
+    }
+
+    .header h1 {
+      font-size: 1.75em;
+      font-weight: 700;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #886df2 0%, #9b87f5 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.3px;
+      line-height: 1.3;
+    }
+
+    .header h2 {
+      font-size: 1em;
+      font-weight: 400;
+      color: #4a4a4a;
+      line-height: 1.5;
+    }
+
+    .header-badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(136, 109, 242, 0.14) 0%, rgba(155, 135, 245, 0.2) 100%);
+      color: #5b4cc6;
+      font-size: 0.8em;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, h4, h5 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      color: #000;
+      page-break-after: avoid;
+    }
+
+    h2 {
+      font-size: 1.5em;
+      margin-top: 40px;
+      margin-bottom: 16px;
+      font-weight: 600;
+      letter-spacing: -0.2px;
+      background: linear-gradient(135deg, #886df2 0%, #9b87f5 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      padding-top: 4px;
+    }
+
+    h3 {
+      font-size: 1.25em;
+      margin-top: 32px;
+      margin-bottom: 14px;
+      font-weight: 600;
+      color: #2f2f2f;
+    }
+
+    h4 {
+      font-size: 1.1em;
+      margin-top: 24px;
+      margin-bottom: 12px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    h5 {
+      font-size: 1em;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      font-weight: 600;
+      color: #444;
+    }
+
+    p {
+      margin-bottom: 14px;
+      color: #1a1a1a;
+      line-height: 1.7;
+      font-size: 1em;
+    }
+
+    ul, ol {
+      margin: 14px 0;
+      padding-left: 24px;
+    }
+
+    li {
+      margin-bottom: 10px;
+      line-height: 1.7;
+      font-size: 1em;
+    }
+
+    ul li::marker {
+      color: #9b87f5;
+    }
+
+    ol li::marker {
+      color: #886df2;
+      font-weight: 600;
+    }
+
+    .section-divider {
+      width: 100%;
+      height: 2px;
+      background: #e0e0e0;
+      margin: 36px 0;
+    }
+
+    .disclaimer,
+    .story-box,
+    .framework-box,
+    .example-box,
+    .tip-box,
+    .exercise-box {
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+      page-break-inside: avoid;
+      font-size: 1em;
+      line-height: 1.7;
+    }
+
+    .disclaimer h3,
+    .story-box h3,
+    .framework-box h3,
+    .example-box h3,
+    .tip-box h3,
+    .exercise-box h3,
+    .disclaimer h4,
+    .story-box h4,
+    .framework-box h4,
+    .example-box h4,
+    .tip-box h4,
+    .exercise-box h4,
+    .disclaimer h5,
+    .story-box h5,
+    .framework-box h5,
+    .example-box h5,
+    .tip-box h5,
+    .exercise-box h5 {
+      margin-top: 0;
+    }
+
+    .disclaimer {
+      background-color: #f5f5f5;
+      border-left: 4px solid #666;
+    }
+
+    .story-box {
+      background-color: #fafafa;
+      border: 1px solid #e0e0e0;
+    }
+
+    .framework-box {
+      background-color: #fff;
+      border: 2px solid #e8e8e8;
+    }
+
+    .example-box {
+      background-color: #f9f9f9;
+      border-left: 4px solid #333;
+    }
+
+    .tip-box {
+      background-color: #fffbf0;
+      border-left: 4px solid #ff9800;
+    }
+
+    .exercise-box {
+      background-color: #f0f8f0;
+      border-left: 4px solid #2e7d32;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 18px 0;
+      font-size: 0.95em;
+    }
+
+    table th,
+    table td {
+      border: 1px solid #dcdcdc;
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+      line-height: 1.6;
+    }
+
+    table th {
+      background: rgba(136, 109, 242, 0.1);
+      color: #5b4cc6;
+      font-weight: 600;
+    }
+
+    table tr:nth-child(even) {
+      background-color: #fafafa;
+    }
+
+    .highlight {
+      background-color: #fff9c4;
+      padding: 3px 8px;
+      border-radius: 3px;
+      font-weight: 500;
+      color: #000;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 2px solid #e0e0e0;
+      color: #666;
+      font-size: 0.85em;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      body {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        position: relative;
+        border-right: none;
+        border-bottom: 2px solid rgba(136, 109, 242, 0.15);
+      }
+
+      .main-content {
+        max-width: 100%;
+        padding: 24px 20px;
+      }
+
+      .header h1 {
+        font-size: 1.5em;
+      }
+    }
+
+    @media print {
+      .sidebar {
+        display: none;
+      }
+
+      .main-content {
+        max-width: 100%;
+        padding: 20px;
+      }
+    }
+
+    /* Scroll behavior */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Code/technical content */
+    code {
+      background-color: #f5f5f5;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.95em;
+    }
+
+    pre {
+      background-color: #f5f5f5;
+      padding: 16px;
+      border-radius: 6px;
+      overflow-x: auto;
+      margin: 18px 0;
+      font-size: 0.9em;
+      line-height: 1.6;
+    }
+
+    pre code {
+      background: none;
+      padding: 0;
+    }
+
+    /* Blockquote style for examples */
+    blockquote {
+      border-left: 4px solid #9b87f5;
+      padding-left: 20px;
+      margin: 24px 0;
+      font-style: italic;
+      color: #555;
+      font-size: 1em;
+      line-height: 1.7;
+    }
+
+    /* Ensure consistent font sizes in nested elements */
+    .example-box p,
+    .framework-box p,
+    .story-box p,
+    .tip-box p,
+    .exercise-box p {
+      font-size: 1em;
+    }
+
+    .example-box ul,
+    .framework-box ul,
+    .story-box ul,
+    .tip-box ul,
+    .exercise-box ul,
+    .example-box ol,
+    .framework-box ol,
+    .story-box ol,
+    .tip-box ol,
+    .exercise-box ol {
+      font-size: 1em;
+    }
+
+    strong {
+      font-weight: 600;
+    }
+
+    em {
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar Navigation -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo-section">
+        <img src="svglogo4.svg" alt="Skillship AI Logo" class="logo-icon" />
+        <div class="logo-text">Skillship AI</div>
+      </div>
+      <div class="sidebar-title">Week 3, Class 2</div>
+      <div class="sidebar-subtitle">Defining Solutions</div>
+    </div>
+
+    <nav>
+      <div class="nav-section">
+        <div class="nav-section-title">Module Overview</div>
+        <ul class="nav-menu">
+          <li><a href="#introduction">Introduction</a></li>
+          <li><a href="#what-is-solution">What is a Solution?</a></li>
+          <li><a href="#learning-objectives">Learning Objectives</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Part 1: Being a Good Solutionist</div>
+        <ul class="nav-menu">
+          <li><a href="#good-solutionist">Who is a Good Solutionist?</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Part 2: Listing All Solutions</div>
+        <ul class="nav-menu">
+          <li><a href="#listing-solutions">Purpose</a></li>
+          <li><a href="#lets-framework">The "Let's" Framework</a></li>
+          <li><a href="#hmw-framework">"How Might We" Framework</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Part 3: MoSCoW</div>
+        <ul class="nav-menu">
+          <li><a href="#moscow-intro">What is MoSCoW?</a></li>
+          <li><a href="#moscow-categories">The Four Categories</a></li>
+          <li><a href="#moscow-practice">Practice Exercise</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Part 4: RICE Framework</div>
+        <ul class="nav-menu">
+          <li><a href="#rice-intro">What is RICE?</a></li>
+          <li><a href="#rice-components">Breaking Down Components</a></li>
+          <li><a href="#rice-example">Complete Example</a></li>
+          <li><a href="#rice-mistakes">Common Mistakes</a></li>
+          <li><a href="#rice-practice">Practice Exercise</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Part 5: Lean Canvas</div>
+        <ul class="nav-menu">
+          <li><a href="#lean-canvas-intro">What is Lean Canvas?</a></li>
+          <li><a href="#canvas-blocks">The 9 Building Blocks</a></li>
+          <li><a href="#canvas-how-to-use">How to Use</a></li>
+          <li><a href="#canvas-practice">Practice Exercise</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Part 6: Solution Hypothesis</div>
+        <ul class="nav-menu">
+          <li><a href="#hypothesis-intro">What is a Solution Hypothesis?</a></li>
+          <li><a href="#hypothesis-structure">The Structure</a></li>
+          <li><a href="#hypothesis-examples">Examples</a></li>
+          <li><a href="#hypothesis-testing">How to Test</a></li>
+          <li><a href="#hypothesis-mistakes">Common Mistakes</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Part 7: Product Roadmap</div>
+        <ul class="nav-menu">
+          <li><a href="#roadmap-intro">What is a Product Roadmap?</a></li>
+          <li><a href="#roadmap-build">How to Build</a></li>
+          <li><a href="#roadmap-example">Example Roadmap</a></li>
+          <li><a href="#roadmap-tips">PM Pro Tips</a></li>
+          <li><a href="#roadmap-practice">Practice Exercise</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Part 8: Real-World Selection</div>
+        <ul class="nav-menu">
+          <li><a href="#five-tests">The 5-Test Filter</a></li>
+          <li><a href="#test-1">Test 1: Stakeholder Buy-In</a></li>
+          <li><a href="#test-2">Test 2: Institutional Capability</a></li>
+          <li><a href="#test-3">Test 3: Core Objectives</a></li>
+          <li><a href="#test-4">Test 4: Product-Market Fit</a></li>
+          <li><a href="#test-5">Test 5: SMART Goals</a></li>
+          <li><a href="#five-test-practice">Final Practice</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Summary & Resources</div>
+        <ul class="nav-menu">
+          <li><a href="#module-summary">Module Summary</a></li>
+          <li><a href="#additional-resources">Additional Resources</a></li>
+          <li><a href="#self-assessment">Self-Assessment</a></li>
+        </ul>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="header" id="introduction">
+      <h1>MODULE 3: DEFINING SOLUTIONS</h1>
+      <h2>From Problems to Possibilities</h2>
+      <div class="header-badges">
+        <span class="badge">Week 3</span>
+        <span class="badge">Solution Definition</span>
+        <span class="badge">Prioritization</span>
+        <span class="badge">Roadmaps</span>
+      </div>
+    </div>
+
+    <div class="story-box">
+      <h3>Module Overview</h3>
+      <p><strong>What You'll Learn:</strong></p>
+      <ul>
+        <li>How to generate creative solutions without constraints</li>
+        <li>Methods to evaluate and prioritize solutions</li>
+        <li>Frameworks to validate and present solution ideas</li>
+        <li>How to build effective product roadmaps</li>
+      </ul>
+    </div>
+
+    <h2 id="what-is-solution">What is a Solution?</h2>
+    
+    <h3>The Simple Definition</h3>
+    <p>A <strong>solution</strong> is a way to address a user's problem or need. It's the "how" that answers the "what" (the problem).</p>
+
+    <h3>The Deeper Truth</h3>
+    <p>A solution isn't just about fixing something broken. It's about:</p>
+    <ul>
+      <li><strong>Creating value</strong> for users</li>
+      <li><strong>Meeting business objectives</strong></li>
+      <li><strong>Being feasible</strong> to build and deliver</li>
+      <li><strong>Solving the right problem</strong> in the right way</li>
+    </ul>
+
+    <h3>Why This Matters</h3>
+    <p>Many products fail not because they're poorly built, but because they solve the wrong problem or solve it in the wrong way. Great product managers master the art of solution definition.</p>
+
+    <div class="section-divider"></div>
+
+    <h2 id="part-1">Part 1: Being a Good Solutionist</h2>
+
+    <h3 id="good-solutionist">Who is a Good Solutionist?</h3>
+    <p>A good solutionist is someone who:</p>
+
+    <h4>1. Thinks of Multiple Ways to Solve the Same Problem</h4>
+    <ul>
+      <li>Doesn't settle for the first idea</li>
+      <li>Explores diverse approaches</li>
+      <li>Considers solutions from different angles</li>
+    </ul>
+
+    <h4>2. Knows Applications of Technologies for Real World Problems</h4>
+    <ul>
+      <li>Understands what's technically possible</li>
+      <li>Connects tech capabilities with user needs</li>
+      <li>Stays updated on emerging solutions</li>
+    </ul>
+
+    <h4>3. Is Inclusive in Stakeholder Approach</h4>
+    <ul>
+      <li>Considers all affected parties</li>
+      <li>Designs for diverse user groups</li>
+      <li>Balances competing interests</li>
+    </ul>
+
+    <h4>4. Designs Solutions That Meet Team/Institution Objectives</h4>
+    <ul>
+      <li>Aligns with business goals</li>
+      <li>Considers resource constraints</li>
+      <li>Thinks about sustainability</li>
+    </ul>
+
+    <div class="tip-box">
+      <h4>🤔 Think About This:</h4>
+      <p><em>Imagine you're solving "people get lost in large hospitals." A bad solutionist says "let's add signs." A good solutionist explores: digital wayfinding apps, companion volunteers, AR navigation, simplified layouts, better check-in processes, text message directions, voice guidance, AND signs. See the difference?</em></p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2 id="part-2">Part 2: Listing All Solutions</h2>
+
+    <h3 id="listing-solutions">Purpose</h3>
+    <p><strong>Irrespective of constraints</strong>, think creatively at a high level about ALL possible solutions. This is your blue-sky thinking phase.</p>
+
+    <h3 id="lets-framework">The "Let's" Framework Structure</h3>
+    
+    <div class="framework-box">
+      <p><strong>Format:</strong></p>
+      <blockquote>
+        Let's [build/do/offer] [key solution idea] so [problem it solves]
+      </blockquote>
+    </div>
+
+    <h4>Why This Structure Works</h4>
+    <ul>
+      <li><strong>"Let's"</strong> - Creates collaborative energy and action orientation</li>
+      <li><strong>[build/do/offer]</strong> - Forces you to think about implementation type</li>
+      <li><strong>[key solution idea]</strong> - Requires clarity and specificity</li>
+      <li><strong>"so"</strong> - Demands you connect solution to problem</li>
+      <li><strong>[problem it solves]</strong> - Keeps you focused on user value</li>
+    </ul>
+
+    <h4>Example: Food Delivery App Problem - "Users don't know when food will arrive"</h4>
+    <p>Let's generate ALL possible solutions:</p>
+    <div class="example-box">
+      <ol>
+        <li>Let's <strong>build</strong> a real-time GPS tracking feature so users can see exactly where their delivery person is</li>
+        <li>Let's <strong>offer</strong> time-guarantee refunds so users feel compensated for uncertainty</li>
+        <li>Let's <strong>do</strong> automated SMS updates every 5 minutes so users stay informed without checking the app</li>
+        <li>Let's <strong>build</strong> an AI prediction model so users get accurate delivery estimates</li>
+        <li>Let's <strong>offer</strong> a "delivery window" option so users can choose their preferred time slot</li>
+        <li>Let's <strong>do</strong> driver check-ins at key milestones so users get status confirmations</li>
+        <li>Let's <strong>build</strong> a chatbot so users can ask about delivery status anytime</li>
+        <li>Let's <strong>offer</strong> live video streaming of food preparation so users see progress</li>
+        <li>Let's <strong>do</strong> proactive delay notifications so users aren't surprised</li>
+        <li>Let's <strong>build</strong> a rewards program for early deliveries so drivers are incentivized to be punctual</li>
+      </ol>
+    </div>
+
+    <div class="tip-box">
+      <h4>The Key Principle: No Idea is Too Wild</h4>
+      <p>At this stage:</p>
+      <ul>
+        <li>❌ Don't judge feasibility</li>
+        <li>❌ Don't worry about cost</li>
+        <li>❌ Don't limit by technology</li>
+        <li>✅ Do think creatively</li>
+        <li>✅ Do consider diverse approaches</li>
+        <li>✅ Do quantity over quality</li>
+      </ul>
+    </div>
+
+    <h3 id="hmw-framework">The "How Might We" Framework</h3>
+
+    <h4>What is HMW?</h4>
+    <p>"How Might We" is a brainstorming technique that reframes problems into opportunities.</p>
+
+    <h4>The Three Magic Words</h4>
+    <ol>
+      <li><strong>"How"</strong> - Suggests we don't have the answer yet (opens possibilities)</li>
+      <li><strong>"Might"</strong> - Suggests our ideas could work or might not (removes pressure)</li>
+      <li><strong>"We"</strong> - Suggests we'll solve it together (builds collaboration)</li>
+    </ol>
+
+    <h4>Converting Problems to HMW Questions</h4>
+    <p><strong>Problem Statement:</strong> "Users struggle with complex legal terminology"</p>
+    
+    <div class="example-box">
+      <p><strong>Bad HMW:</strong> "How might we simplify legal language?"</p>
+      <ul>
+        <li>Too obvious, doesn't inspire creativity</li>
+      </ul>
+      
+      <p><strong>Good HMW:</strong> "How might we make legal concepts feel like everyday conversations?"</p>
+      <ul>
+        <li>Opens creative possibilities</li>
+      </ul>
+      
+      <p><strong>Great HMW:</strong> "How might we help users understand legal implications without reading legal jargon?"</p>
+      <ul>
+        <li>Focuses on the outcome, not the method</li>
+      </ul>
+    </div>
+
+    <h4>HMW Practice Examples</h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Problem</th>
+          <th>HMW Question</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Elderly users find our app confusing</td>
+          <td>How might we make our app feel familiar to people who didn't grow up with smartphones?</td>
+        </tr>
+        <tr>
+          <td>Users abandon checkout due to long forms</td>
+          <td>How might we gather necessary information without it feeling like homework?</td>
+        </tr>
+        <tr>
+          <td>Customers don't trust our new brand</td>
+          <td>How might we demonstrate our reliability before users make a purchase?</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="exercise-box">
+      <h4>💭 Your Turn:</h4>
+      <p>For each problem, write 3 different HMW questions:</p>
+      <ol>
+        <li>"Users forget to take their medication"</li>
+        <li>"Students procrastinate on assignments"</li>
+        <li>"People feel lonely in big cities"</li>
+      </ol>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2 id="part-3">Part 3: MoSCoW Feature Categorization</h2>
+
+    <h3 id="moscow-intro">What is MoSCoW?</h3>
+    <p>MoSCoW is a prioritization method that categorizes features into four buckets.</p>
+
+    <h3 id="moscow-categories">The Four Categories</h3>
+
+    <h4>M - MUST Have</h4>
+    <ul>
+      <li>Critical features without which the product fails</li>
+      <li>Non-negotiable for launch</li>
+      <li>Legal requirements, core functionality</li>
+      <li><em>If we don't have this, users can't complete their primary goal</em></li>
+    </ul>
+
+    <div class="example-box">
+      <p><strong>Example (Food Delivery App):</strong></p>
+      <ul>
+        <li>Menu browsing</li>
+        <li>Order placement</li>
+        <li>Payment processing</li>
+        <li>Delivery address entry</li>
+      </ul>
+    </div>
+
+    <h4>S - SHOULD Have</h4>
+    <ul>
+      <li>Important features that add significant value</li>
+      <li>Not critical for launch but needed soon after</li>
+      <li>Users will notice if missing but can work around it</li>
+      <li><em>Nice to have for launch, essential for success</em></li>
+    </ul>
+
+    <div class="example-box">
+      <p><strong>Example:</strong></p>
+      <ul>
+        <li>Order history</li>
+        <li>Restaurant ratings</li>
+        <li>Estimated delivery time</li>
+        <li>Multiple payment options</li>
+      </ul>
+    </div>
+
+    <h4>C - COULD Have</h4>
+    <ul>
+      <li>Desirable features that improve experience</li>
+      <li>Can be postponed if resources are limited</li>
+      <li>Users won't complain if missing initially</li>
+      <li><em>Would be nice but not necessary</em></li>
+    </ul>
+
+    <div class="example-box">
+      <p><strong>Example:</strong></p>
+      <ul>
+        <li>Loyalty rewards program</li>
+        <li>Social sharing of orders</li>
+        <li>Dietary filters</li>
+        <li>Restaurant recommendations</li>
+      </ul>
+    </div>
+
+    <h4>W - WON'T Have (this time)</h4>
+    <ul>
+      <li>Explicitly out of scope for current release</li>
+      <li>Might be considered for future versions</li>
+      <li>Helps manage stakeholder expectations</li>
+      <li><em>We've thought about it, but deliberately excluding it</em></li>
+    </ul>
+
+    <div class="example-box">
+      <p><strong>Example:</strong></p>
+      <ul>
+        <li>Grocery delivery</li>
+        <li>Table reservations</li>
+        <li>Recipe suggestions</li>
+        <li>Meal planning tools</li>
+      </ul>
+    </div>
+
+    <h4>Why MoSCoW Matters</h4>
+    <ol>
+      <li><strong>Prevents Scope Creep</strong> - Clear boundaries on what's in/out</li>
+      <li><strong>Manages Expectations</strong> - Stakeholders know what to expect</li>
+      <li><strong>Enables Smart Tradeoffs</strong> - Clear on what can be cut if needed</li>
+      <li><strong>Speeds Decision Making</strong> - Framework for quick prioritization</li>
+    </ol>
+
+    <div class="tip-box">
+      <h4>🎯 The Real Skill: Knowing the Difference</h4>
+      <p>Many PMs struggle because they categorize everything as "Must Have."</p>
+      <p><strong>Ask These Questions:</strong></p>
+      <ul>
+        <li>Can users complete their core task without this?</li>
+        <li>Will the product be meaningless if we remove this?</li>
+        <li>Is this a regulatory/legal requirement?</li>
+        <li>Would users pay for the product without this feature?</li>
+      </ul>
+      <p>If all answers are "yes" → Must Have<br>
+      If most are "yes" → Should Have<br>
+      If some are "yes" → Could Have<br>
+      If none are "yes" → Won't Have</p>
+    </div>
+
+    <div class="exercise-box">
+      <h4>🔄 Practice Exercise: Categorize These Features</h4>
+      <p>You're building a meditation app. Categorize these features:</p>
+      <ol>
+        <li>Guided meditation audio</li>
+        <li>Daily reminders</li>
+        <li>Social sharing</li>
+        <li>Sleep sounds</li>
+        <li>User progress tracking</li>
+        <li>Offline access</li>
+        <li>Custom meditation creation</li>
+        <li>Expert video courses</li>
+        <li>Breathing exercise counter</li>
+        <li>Community forums</li>
+        <li>Apple Watch integration</li>
+        <li>Journaling feature</li>
+      </ol>
+      <p><em>Think about: What's the CORE value? What can wait? What would users pay for on day 1?</em></p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2 id="part-4">Part 4: RICE Framework</h2>
+
+    <h3 id="rice-intro">What is RICE?</h3>
+    <p>RICE is a scoring method to prioritize solutions based on four factors:</p>
+    <ul>
+      <li><strong>R</strong>each</li>
+      <li><strong>I</strong>mpact</li>
+      <li><strong>C</strong>onfidence</li>
+      <li><strong>E</strong>ffort</li>
+    </ul>
+
+    <h4>The Formula</h4>
+    <div class="framework-box">
+      <pre><code>RICE Score = (Reach × Impact × Confidence) / Effort</code></pre>
+      <p style="text-align: center; margin-top: 12px;"><strong>Higher score = Higher priority</strong></p>
+    </div>
+
+    <h3 id="rice-components">Breaking Down Each Component</h3>
+
+    <h4>R - Reach</h4>
+    <p><em>How many users will this impact in a given time period?</em></p>
+    <p><strong>Measurement:</strong> Number of users/customers per time period (month/quarter)</p>
+
+    <div class="example-box">
+      <p><strong>Examples:</strong></p>
+      <ul>
+        <li>"This feature will reach 10,000 users per month"</li>
+        <li>"This will impact 50% of our user base in Q1"</li>
+        <li>"Every new user will encounter this (5,000/month)"</li>
+      </ul>
+    </div>
+
+    <div class="tip-box">
+      <p><strong>Common Mistake:</strong> Counting total users instead of who it reaches in a time period</p>
+    </div>
+
+    <h4>I - Impact</h4>
+    <p><em>How much will this impact each user when they encounter it?</em></p>
+    <p><strong>Scale:</strong> Use a standardized scale</p>
+
+    <div class="framework-box">
+      <ul>
+        <li><strong>3</strong> = Massive impact</li>
+        <li><strong>2</strong> = High impact</li>
+        <li><strong>1</strong> = Medium impact</li>
+        <li><strong>0.5</strong> = Low impact</li>
+        <li><strong>0.25</strong> = Minimal impact</li>
+      </ul>
+    </div>
+
+    <div class="example-box">
+      <p><strong>Examples:</strong></p>
+      <ul>
+        <li>Fixing a checkout bug (prevents purchase) = <strong>3</strong> (Massive)</li>
+        <li>Adding one-click reorder = <strong>2</strong> (High)</li>
+        <li>Improving search suggestions = <strong>1</strong> (Medium)</li>
+        <li>Changing button color = <strong>0.5</strong> (Low)</li>
+        <li>Adding animation to loading screen = <strong>0.25</strong> (Minimal)</li>
+      </ul>
+    </div>
+
+    <p><strong>Think About:</strong> Does this solve a major pain point? Does it enable a key outcome?</p>
+
+    <h4>C - Confidence</h4>
+    <p><em>How confident are you in your estimates?</em></p>
+    <p><strong>Scale:</strong> Percentage</p>
+
+    <div class="framework-box">
+      <ul>
+        <li><strong>100%</strong> = High confidence (have data/research)</li>
+        <li><strong>80%</strong> = Medium confidence (some data/research)</li>
+        <li><strong>50%</strong> = Low confidence (mostly gut feeling)</li>
+      </ul>
+    </div>
+
+    <div class="example-box">
+      <p><strong>Examples:</strong></p>
+      <ul>
+        <li>"We've tested this with 50 users" = <strong>100%</strong></li>
+        <li>"We have competitor data and some user interviews" = <strong>80%</strong></li>
+        <li>"This is based on stakeholder opinion" = <strong>50%</strong></li>
+      </ul>
+    </div>
+
+    <div class="tip-box">
+      <p><strong>Pro Tip:</strong> Lower confidence = higher risk. Sometimes better to do research first.</p>
+    </div>
+
+    <h4>E - Effort</h4>
+    <p><em>How much work is required?</em></p>
+    <p><strong>Measurement:</strong> Person-months (total team effort)</p>
+
+    <div class="example-box">
+      <p><strong>Examples:</strong></p>
+      <ul>
+        <li>Simple UI change = <strong>0.5</strong> person-months</li>
+        <li>New feature with backend + frontend = <strong>3</strong> person-months</li>
+        <li>Major platform overhaul = <strong>12</strong> person-months</li>
+      </ul>
+    </div>
+
+    <p><strong>Consider:</strong></p>
+    <ul>
+      <li>Design time</li>
+      <li>Development time</li>
+      <li>Testing time</li>
+      <li>Documentation time</li>
+      <li>Deployment complexity</li>
+    </ul>
+
+    <h3 id="rice-example">📈 RICE in Action: Complete Example</h3>
+    <p><strong>Feature:</strong> Add real-time GPS tracking to food delivery app</p>
+
+    <p>Let's calculate:</p>
+    <ol>
+      <li><strong>Reach:</strong> 50,000 orders per month will use this
+        <ul>
+          <li>R = <strong>50,000</strong></li>
+        </ul>
+      </li>
+      <li><strong>Impact:</strong> Users constantly complain about not knowing delivery status; this solves major pain
+        <ul>
+          <li>I = <strong>2</strong> (High impact)</li>
+        </ul>
+      </li>
+      <li><strong>Confidence:</strong> We've interviewed 30 users, all want this; competitors have it successfully
+        <ul>
+          <li>C = <strong>80%</strong> (0.8)</li>
+        </ul>
+      </li>
+      <li><strong>Effort:</strong> Need GPS integration, real-time updates, map display, backend infrastructure
+        <ul>
+          <li>E = <strong>4</strong> person-months</li>
+        </ul>
+      </li>
+    </ol>
+
+    <div class="framework-box">
+      <p style="font-size: 1.2em; text-align: center; margin: 24px 0;">
+        <strong>RICE Score = (50,000 × 2 × 0.8) / 4 = 20,000</strong>
+      </p>
+    </div>
+
+    <h4>Comparing Multiple Solutions</h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Solution</th>
+          <th>Reach</th>
+          <th>Impact</th>
+          <th>Confidence</th>
+          <th>Effort</th>
+          <th>RICE Score</th>
+          <th>Priority</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>GPS Tracking</td>
+          <td>50,000</td>
+          <td>2</td>
+          <td>0.8</td>
+          <td>4</td>
+          <td>20,000</td>
+          <td>🥇 1st</td>
+        </tr>
+        <tr>
+          <td>Chatbot Support</td>
+          <td>10,000</td>
+          <td>1</td>
+          <td>0.5</td>
+          <td>3</td>
+          <td>1,667</td>
+          <td>3rd</td>
+        </tr>
+        <tr>
+          <td>Loyalty Program</td>
+          <td>30,000</td>
+          <td>1</td>
+          <td>0.8</td>
+          <td>6</td>
+          <td>4,000</td>
+          <td>🥈 2nd</td>
+        </tr>
+        <tr>
+          <td>Video of Food Prep</td>
+          <td>5,000</td>
+          <td>0.5</td>
+          <td>0.5</td>
+          <td>8</td>
+          <td>156</td>
+          <td>4th</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p><strong>Insight:</strong> Even though video of food prep seems cool, its low reach and high effort make it a poor priority.</p>
+
+    <h4 id="rice-mistakes">⚠️ Common RICE Mistakes</h4>
+    <ol>
+      <li><strong>Overestimating Impact</strong> - Being in love with your own idea
+        <ul>
+          <li>Fix: Ask "Would users pay extra for this?"</li>
+        </ul>
+      </li>
+      <li><strong>Underestimating Effort</strong> - Forgetting testing, design, documentation
+        <ul>
+          <li>Fix: Include full development lifecycle</li>
+        </ul>
+      </li>
+      <li><strong>Fake Confidence</strong> - Guessing but marking 100%
+        <ul>
+          <li>Fix: Be honest; low confidence is valuable information</li>
+        </ul>
+      </li>
+      <li><strong>Wrong Time Period for Reach</strong> - Mixing daily and monthly numbers
+        <ul>
+          <li>Fix: Standardize to one period (usually monthly or quarterly)</li>
+        </ul>
+      </li>
+    </ol>
+
+    <div class="exercise-box">
+      <h4>🏋️ Practice Exercise: Calculate RICE</h4>
+      <p>You're building a fitness app. Calculate RICE for these features:</p>
+      
+      <p><strong>Feature 1: Workout Video Library</strong></p>
+      <ul>
+        <li>Reach: 8,000 users/month will watch videos</li>
+        <li>Impact: Helps users learn proper form (High = 2)</li>
+        <li>Confidence: Medium, based on surveys (80%)</li>
+        <li>Effort: 6 person-months (filming, editing, upload system)</li>
+      </ul>
+
+      <p><strong>Feature 2: Friend Challenges</strong></p>
+      <ul>
+        <li>Reach: 2,000 users/month (only social users)</li>
+        <li>Impact: Increases motivation (Medium = 1)</li>
+        <li>Confidence: Low, no user testing yet (50%)</li>
+        <li>Effort: 3 person-months</li>
+      </ul>
+
+      <p><strong>Feature 3: Quick Start Button</strong></p>
+      <ul>
+        <li>Reach: 20,000 users/month (all active users)</li>
+        <li>Impact: Saves 30 seconds per workout (Low = 0.5)</li>
+        <li>Confidence: High, simple feature (100%)</li>
+        <li>Effort: 0.5 person-months</li>
+      </ul>
+
+      <p><em>Calculate the RICE score for each. Which should you build first?</em></p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2 id="part-5">Part 5: Lean Business Canvas</h2>
+
+    <h3 id="lean-canvas-intro">What is the Lean Business Canvas?</h3>
+    <p>A one-page business plan that helps you <strong>present a solution comprehensively</strong> by breaking it down into 9 key building blocks.</p>
+
+    <h4>Why Lean Canvas vs. Traditional Business Plan?</h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Traditional Business Plan</th>
+          <th>Lean Canvas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>50-100 pages</td>
+          <td>1 page</td>
+        </tr>
+        <tr>
+          <td>Takes weeks/months</td>
+          <td>Takes hours</td>
+        </tr>
+        <tr>
+          <td>Based on assumptions</td>
+          <td>Designed to test assumptions</td>
+        </tr>
+        <tr>
+          <td>Static document</td>
+          <td>Living document</td>
+        </tr>
+        <tr>
+          <td>For investors</td>
+          <td>For building products</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 id="canvas-blocks">The 9 Building Blocks (In Order of Completion)</h3>
+
+    <h4>Block 1: Problem (Complete This First)</h4>
+    <p><em>What problem are you solving?</em></p>
+    <p><strong>What to Include:</strong></p>
+    <ul>
+      <li>Top 3 problems your users face</li>
+      <li>Existing alternatives they currently use</li>
+      <li>Why existing alternatives fail</li>
+    </ul>
+
+    <div class="example-box">
+      <p><strong>Example: Legal Tech App</strong></p>
+      <p><strong>Problems:</strong></p>
+      <ol>
+        <li>High legal costs (₹5,000-50,000 per consultation)</li>
+        <li>Complex legal language and terminology</li>
+        <li>Reliance on internal references/connections</li>
+      </ol>
+      <p><strong>Existing Alternatives:</strong></p>
+      <ul>
+        <li>Hire expensive lawyers</li>
+        <li>Google legal information (unreliable)</li>
+        <li>Ask friends/family for recommendations</li>
+        <li>Legal aid clinics (long wait times)</li>
+      </ul>
+      <p><strong>Why Think About This First:</strong> Everything else on the canvas is meaningless if you're solving the wrong problem.</p>
+    </div>
+
+    <h4>Block 2: Customer Segments (Complete This Second)</h4>
+    <p><em>Who has the problem?</em></p>
+    <p><strong>What to Include:</strong></p>
+    <ul>
+      <li>Who are your target customers?</li>
+      <li>Early adopters (first users)</li>
+      <li>Demographics and characteristics</li>
+    </ul>
+
+    <div class="example-box">
+      <p><strong>Example: Legal Tech App</strong></p>
+      <p><strong>Target Customers:</strong></p>
+      <ul>
+        <li>Age: 16-50</li>
+        <li>Geography: Start Gujarat → Western India → Pan-India</li>
+        <li>People facing common legal issues (tenant disputes, consumer rights, traffic violations)</li>
+        <li>Tech-comfortable users who prefer digital solutions</li>
+      </ul>
+      <p><strong>Early Adopters:</strong></p>
+      <ul>
+        <li>Young professionals (25-35)</li>
+        <li>Small business owners</li>
+        <li>People with previous legal frustrations</li>
+        <li>Tech-savvy individuals</li>
+      </ul>
+      <p><strong>Why Identify Early Adopters:</strong> They're more forgiving of imperfect products and will give you feedback. Don't try to serve everyone at once.</p>
+    </div>
+
+    <h4>Block 3: Solution (Complete This Third)</h4>
+    <p><em>How do you solve the problem?</em></p>
+    <p><strong>What to Include:</strong></p>
+    <ul>
+      <li>Top 3 features/solutions</li>
+      <li>How each addresses a specific problem</li>
+    </ul>
+
+    <div class="example-box">
+      <p><strong>Example: Legal Tech App</strong></p>
+      <p><strong>Solutions:</strong></p>
+      <ol>
+        <li><strong>AI-Powered Chat Interface</strong>
+          <ul>
+            <li>Solves: Accessibility and cost (no expensive lawyer needed)</li>
+          </ul>
+        </li>
+        <li><strong>Plain Language Translation</strong>
+          <ul>
+            <li>Solves: Complex legal jargon becomes understandable</li>
+          </ul>
+        </li>
+        <li><strong>Mobile-First App</strong>
+          <ul>
+            <li>Solves: Access anytime, anywhere (no reliance on references)</li>
+          </ul>
+        </li>
+      </ol>
+      <p><strong>Key Principle:</strong> Each solution should map to a specific problem from Block 1.</p>
+    </div>
+
+    <h4>Block 4: Unique Value Proposition (UVP)</h4>
+    <p><em>Why are you different and worth paying attention to?</em></p>
+    <p><strong>What to Include:</strong></p>
+    <ul>
+      <li>Single, clear, compelling message</li>
+      <li>What makes you different from alternatives</li>
+      <li>Why customers should choose you</li>
+    </ul>
+
+    <div class="framework-box">
+      <p><strong>Formula:</strong></p>
+      <blockquote>[End benefit] for [target customer] who [problem/need]</blockquote>
+    </div>
+
+    <div class="example-box">
+      <p><strong>Example: Legal Tech App</strong></p>
+      <p><strong>UVP:</strong></p>
+      <blockquote>"Legal clarity at your fingertips, in your language, at a fraction of the cost"</blockquote>
+      <p><strong>What Makes It Unique:</strong></p>
+      <ul>
+        <li>Unlike expensive lawyers → Affordable</li>
+        <li>Unlike Google → Reliable and personalized</li>
+        <li>Unlike competitors → Multi-language support (key differentiator)</li>
+      </ul>
+      <p><strong>Bad UVP Examples:</strong></p>
+      <ul>
+        <li>"The best legal app" (not specific)</li>
+        <li>"AI-powered legal solutions" (technology, not benefit)</li>
+        <li>"Fast and easy" (too generic)</li>
+      </ul>
+      <p><strong>Good UVP Examples:</strong></p>
+      <ul>
+        <li>"Get personalized legal advice in Gujarati for ₹99"</li>
+        <li>"Legal solutions without the legal jargon"</li>
+      </ul>
+    </div>
+
+    <h4>Block 5: Unfair Advantage</h4>
+    <p><em>What can't be easily copied or bought?</em></p>
+    <p><strong>What to Include:</strong></p>
+    <ul>
+      <li>Real competitive advantages</li>
+      <li>Things that take time to build</li>
+      <li>Unique assets or capabilities</li>
+    </ul>
+
+    <div class="example-box">
+      <p><strong>Example: Legal Tech App</strong></p>
+      <p><strong>Unfair Advantages:</strong></p>
+      <ul>
+        <li><strong>Intellectual Property:</strong> Proprietary AI algorithm trained on regional laws</li>
+        <li><strong>Design Excellence:</strong> User experience that makes legal solutions feel simple</li>
+        <li><strong>Network Effects:</strong> As more users ask questions, AI gets smarter</li>
+        <li><strong>Regional Expertise:</strong> Deep understanding of Gujarat legal system</li>
+        <li><strong>Brand Reputation:</strong> (builds over time)</li>
+      </ul>
+      <p><strong>What is NOT an Unfair Advantage:</strong></p>
+      <ul>
+        <li>"We'll execute better" (everyone says this)</li>
+        <li>"First mover advantage" (rarely lasts)</li>
+        <li>"Better technology" (can be copied)</li>
+        <li>Money, team (can be hired/bought)</li>
+      </ul>
+      <p><strong>The Real Test:</strong> If a competitor with unlimited money tried to copy you tomorrow, what would they struggle with?</p>
+    </div>
+
+    <h4>Block 6: Channels</h4>
+    <p><em>How do you reach your customers?</em></p>
+    <p><strong>What to Include:</strong></p>
+    <ul>
+      <li>How customers discover you</li>
+      <li>How you deliver your product</li>
+      <li>How you communicate with users</li>
+    </ul>
+
+    <h5>Types of Channels:</h5>
+    <div class="framework-box">
+      <p><strong>Owned Channels:</strong></p>
+      <ul>
+        <li>Your website</li>
+        <li>Email list</li>
+        <li>Mobile app</li>
+        <li>Blog/content</li>
+      </ul>
+      <p><strong>Earned Channels:</strong></p>
+      <ul>
+        <li>Social media (organic)</li>
+        <li>Word of mouth</li>
+        <li>PR/Media coverage</li>
+        <li>User referrals</li>
+      </ul>
+      <p><strong>Paid Channels:</strong></p>
+      <ul>
+        <li>Social media ads</li>
+        <li>Search engine marketing (SEM)</li>
+        <li>Display advertising</li>
+        <li>Influencer partnerships</li>
+      </ul>
+    </div>
+
+    <h4>Block 7: Key Metrics</h4>
+    <p><em>How do you measure success?</em></p>
+    <p><strong>The Pirate Metrics Framework (AARRR):</strong></p>
+    <ol>
+      <li><strong>Acquisition:</strong> How many users discover you?</li>
+      <li><strong>Activation:</strong> Do they have a good first experience?</li>
+      <li><strong>Retention:</strong> Do they come back?</li>
+      <li><strong>Revenue:</strong> Are they paying?</li>
+      <li><strong>Referral:</strong> Do they tell others?</li>
+    </ol>
+
+    <h4>Block 8: Cost Structure</h4>
+    <p><em>What will it cost to create and deliver your solution?</em></p>
+    <p><strong>Types of Costs:</strong></p>
+    <div class="framework-box">
+      <p><strong>Fixed Costs (Same regardless of users):</strong></p>
+      <ul>
+        <li>Team salaries</li>
+        <li>Office rent</li>
+        <li>Software licenses (fixed fee)</li>
+        <li>Legal/compliance</li>
+        <li>Marketing (brand building)</li>
+      </ul>
+      <p><strong>Variable Costs (Increase with more users):</strong></p>
+      <ul>
+        <li>Server/hosting costs</li>
+        <li>Customer support</li>
+        <li>Transaction fees</li>
+        <li>AI API calls</li>
+        <li>Marketing (per acquisition)</li>
+      </ul>
+    </div>
+
+    <h4>Block 9: Revenue Streams</h4>
+    <p><em>How do you make money?</em></p>
+    <p><strong>Common Revenue Models:</strong></p>
+    <ol>
+      <li><strong>Subscription (Recurring)</strong> - Monthly/annual fees</li>
+      <li><strong>Transaction Fee</strong> - Charge per use</li>
+      <li><strong>Freemium</strong> - Basic features free, premium features paid</li>
+      <li><strong>Advertising</strong> - Display ads, sponsored content</li>
+      <li><strong>Marketplace</strong> - Commission on transactions</li>
+    </ol>
+
+    <h3 id="canvas-how-to-use">🎯 How to Use the Lean Canvas</h3>
+    <ol>
+      <li><strong>Fill it out in order:</strong> Problem → Customer Segments → Solution → UVP → Unfair Advantage → Channels → Key Metrics → Costs → Revenue</li>
+      <li><strong>Treat it as hypotheses, not facts:</strong> Everything is an assumption until validated</li>
+      <li><strong>Update regularly:</strong> Review monthly, update as you learn</li>
+      <li><strong>Test risky assumptions first:</strong> Identify biggest uncertainties, run experiments to validate</li>
+    </ol>
+
+    <div class="exercise-box">
+      <h4>💪 Practice Exercise: Create Your Own Lean Canvas</h4>
+      <p><strong>Scenario:</strong> You're building an app to help college students find affordable housing near campus.</p>
+      <p>Fill out all 9 blocks of the Lean Canvas:</p>
+      <p><strong>Guiding Questions:</strong></p>
+      <ul>
+        <li>What are the top 3 problems students face finding housing?</li>
+        <li>Who are your early adopters?</li>
+        <li>What's your unique solution?</li>
+        <li>How will you reach students?</li>
+        <li>What will you measure?</li>
+        <li>How will you make money?</li>
+      </ul>
+      <p><em>Bonus: Calculate if your revenue > costs</em></p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2 id="part-6">Part 6: Solution Hypothesis Statement</h2>
+
+    <h3 id="hypothesis-intro">What is a Solution Hypothesis?</h3>
+    <p>A <strong>testable statement</strong> that clearly defines what you're building, who it's for, and why you believe it will work.</p>
+
+    <h4>Purpose</h4>
+    <ol>
+      <li><strong>Forces Clarity</strong> - Makes you articulate your assumptions</li>
+      <li><strong>Enables Testing</strong> - Turns beliefs into testable hypotheses</li>
+      <li><strong>Creates Alignment</strong> - Gets team on same page</li>
+      <li><strong>Guides Development</strong> - Provides clear direction</li>
+    </ol>
+
+    <h3 id="hypothesis-structure">The Structure</h3>
+    <div class="framework-box">
+      <pre><code>We believe that by [offering/building/doing solution idea],
+[user group] will [experience change or benefit],
+because [reason/insight].</code></pre>
+    </div>
+
+    <h3 id="hypothesis-examples">🌟 Examples: From Bad to Great</h3>
+
+    <h4>Example 1: Food Delivery App</h4>
+    <div class="example-box">
+      <p><strong>❌ Bad:</strong></p>
+      <p>"We believe that by building a food delivery app, users will order more food, because everyone likes convenience."</p>
+      <ul>
+        <li>Too generic</li>
+        <li>No specific user group</li>
+        <li>Weak reasoning</li>
+      </ul>
+
+      <p><strong>✅ Good:</strong></p>
+      <p>"We believe that by offering real-time GPS tracking of delivery drivers, busy professionals will feel more in control of their time, because our research shows uncertainty about delivery timing is the #1 source of frustration."</p>
+      <ul>
+        <li>Specific solution</li>
+        <li>Defined user group</li>
+        <li>Clear benefit</li>
+        <li>Research-based reasoning</li>
+      </ul>
+
+      <p><strong>⭐ Great:</strong></p>
+      <p>"We believe that by building a GPS tracking feature with 'ready in 5 minutes' notifications, busy professionals ordering during work breaks will order 30% more frequently, because our interviews revealed that fear of food arriving during meetings is the primary reason users don't order more often."</p>
+      <ul>
+        <li>Very specific solution</li>
+        <li>Precise user context</li>
+        <li>Measurable outcome</li>
+        <li>Validated insight</li>
+      </ul>
+    </div>
+
+    <h3 id="hypothesis-testing">🔬 How to Test Your Hypothesis</h3>
+    <ol>
+      <li><strong>Identify the Riskiest Assumption</strong> - What if this isn't true?</li>
+      <li><strong>Design a Test</strong> - User interviews, MVP, surveys</li>
+      <li><strong>Learn and Iterate</strong> - Validate, partially validate, or invalidate</li>
+    </ol>
+
+    <h3 id="hypothesis-mistakes">🚨 Common Mistakes in Hypothesis Writing</h3>
+    <div class="tip-box">
+      <h4>Mistake 1: Solution Looking for a Problem</h4>
+      <p><strong>❌:</strong> "We believe that by using blockchain technology, millennials will trust our platform more, because blockchain is the future."</p>
+      <p><strong>✅:</strong> "We believe that by showing transparent transaction history with tamper-proof records, gig economy workers will choose our payment platform, because 35% report disputes over payment amounts with no proof."</p>
+
+      <h4>Mistake 2: Too Vague to Test</h4>
+      <p><strong>❌:</strong> "We believe that by making our app better, users will be happier, because good UX matters."</p>
+      <p><strong>✅:</strong> "We believe that by reducing checkout steps from 5 to 2, mobile users will increase purchase completion by 25%, because our analytics show 60% abandon cart at step 3."</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2 id="part-7">Part 7: Product Roadmap</h2>
+
+    <h3 id="roadmap-intro">What is a Product Roadmap?</h3>
+    <p>A <strong>strategic document</strong> that shows:</p>
+    <ul>
+      <li><strong>What</strong> you're building</li>
+      <li><strong>Why</strong> you're building it</li>
+      <li><strong>When</strong> you're building it (roughly)</li>
+      <li><strong>How</strong> it aligns with company goals</li>
+    </ul>
+
+    <h4>What a Roadmap is NOT</h4>
+    <ul>
+      <li>❌ A list of features</li>
+      <li>❌ A detailed project plan</li>
+      <li>❌ A commitment of exact dates</li>
+      <li>❌ A wish list from stakeholders</li>
+    </ul>
+
+    <h4>Why Roadmaps Matter</h4>
+    <ol>
+      <li><strong>Alignment</strong> - Gets everyone moving in the same direction</li>
+      <li><strong>Communication</strong> - Clear vision of the future</li>
+      <li><strong>Prioritization</strong> - Shows what matters most</li>
+      <li><strong>Expectation Management</strong> - Shows what's NOT being built</li>
+      <li><strong>Strategic Thinking</strong> - Forces long-term planning</li>
+    </ol>
+
+    <h3 id="roadmap-build">🏗️ How to Build a Product Roadmap</h3>
+
+    <h4>Step 1: Define Vision & Goals</h4>
+    <p><strong>Vision:</strong> The big picture - where are you going?</p>
+    <p><strong>Goals:</strong> Specific objectives that support the vision</p>
+
+    <h4>Step 2: Prioritize Based on Impact & Effort</h4>
+    <p>Use the frameworks you've learned: RICE scoring, MoSCoW, Value vs. Effort Matrix</p>
+
+    <h4>Step 3: Organize into Phases/Milestones</h4>
+    <p><strong>Common Roadmap Structures:</strong></p>
+    <ul>
+      <li><strong>Time-Based:</strong> Q1, Q2, Q3, Q4</li>
+      <li><strong>Now/Next/Later:</strong> Currently building, up next, future consideration</li>
+      <li><strong>Theme-Based:</strong> Organized by strategic themes</li>
+    </ul>
+
+    <h3 id="roadmap-example">📅 Example Roadmap: Food Delivery App</h3>
+    <p><strong>Vision:</strong> Most reliable food delivery platform in India</p>
+
+    <h4>Now (Next 2 Months) - Theme: Trust & Reliability</h4>
+    <p><strong>Goal:</strong> Increase delivery accuracy to 90%</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Initiative</th>
+          <th>Why</th>
+          <th>Expected Outcome</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>GPS Tracking</td>
+          <td>Users constantly ask "where's my food?"</td>
+          <td>40% reduction in "where is my order" support tickets</td>
+        </tr>
+        <tr>
+          <td>Smart ETA Algorithm</td>
+          <td>Current estimates are off by 15-20 mins</td>
+          <td>Improve accuracy from 75% to 90%</td>
+        </tr>
+        <tr>
+          <td>Driver Check-Ins</td>
+          <td>Validate delivery milestones</td>
+          <td>Real-time status updates, fewer customer calls</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 id="roadmap-tips">🎯 PM Pro Tips for Roadmaps</h3>
+
+    <h4>Tip 1: Keep Roadmaps Outcome-Focused, Not Feature-Focused</h4>
+    <div class="example-box">
+      <p><strong>❌ Feature-Focused (Bad):</strong></p>
+      <p>Q1: Build GPS tracking, notifications, dark mode</p>
+      <p><strong>✅ Outcome-Focused (Good):</strong></p>
+      <p>Q1: Improve Delivery Reliability</p>
+      <ul>
+        <li>Users will know exactly when food arrives (GPS tracking)</li>
+        <li>Users stay informed automatically (smart notifications)</li>
+      </ul>
+      <p>Target: 90% delivery accuracy, -40% support tickets</p>
+    </div>
+
+    <h4>Tip 2: Use Time Horizons (Now/Next/Later) Instead of Specific Dates</h4>
+    <p><strong>The 70-20-10 Rule:</strong></p>
+    <ul>
+      <li><strong>70%</strong> - Core product improvements</li>
+      <li><strong>20%</strong> - Adjacent opportunities</li>
+      <li><strong>10%</strong> - Transformational bets</li>
+    </ul>
+
+    <div class="exercise-box">
+      <h4>💪 Practice Exercise: Build Your Roadmap</h4>
+      <p><strong>Scenario:</strong> You're the PM for a language learning app.</p>
+      <p><strong>Vision:</strong> "Help 10 million people become conversational in a new language"</p>
+      <p><strong>Current Situation:</strong></p>
+      <ul>
+        <li>500,000 users</li>
+        <li>4.0-star rating</li>
+        <li>30% monthly active users (MAU)</li>
+        <li>Main complaint: "Gets boring after a few weeks"</li>
+      </ul>
+      <p><strong>Company Goals (12 months):</strong></p>
+      <ul>
+        <li>Grow to 2 million users</li>
+        <li>Increase MAU to 50%</li>
+        <li>Achieve 4.5-star rating</li>
+        <li>Launch premium tier</li>
+      </ul>
+      <p><strong>Available Features to Prioritize:</strong></p>
+      <ol>
+        <li>Speech recognition practice (High effort, High impact)</li>
+        <li>Gamification with leaderboards (Medium effort, Medium impact)</li>
+        <li>Live conversation practice (Very high effort, Very high impact)</li>
+        <li>Offline mode (Low effort, Medium impact)</li>
+        <li>Daily streaks & reminders (Low effort, High impact)</li>
+      </ol>
+      <p><em>Which features directly address "gets boring"? What's the 70-20-10 split?</em></p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2 id="part-8">Part 8: Real-World Solution Selection</h2>
+
+    <h3>In Real World, A Solution Must Pass These Tests:</h3>
+
+    <h3 id="test-1">Test 1: Primary Stakeholder Buy-In</h3>
+    <p><em>The main person/group affected by the solution must want it.</em></p>
+    <div class="example-box">
+      <p><strong>Example: B2B School Management Software</strong></p>
+      <p><strong>Primary Stakeholder:</strong> Teachers (main users)</p>
+      <p><strong>❌ Fails Test:</strong> "Let's add automated grading that teachers can't override"</p>
+      <p><strong>✅ Passes Test:</strong> "Let's add AI-assisted grading that teachers can review and adjust"</p>
+    </div>
+
+    <h3 id="test-2">Test 2: Institutional Capability</h3>
+    <p><em>Can your organization actually build and maintain this?</em></p>
+    <p><strong>Consider:</strong></p>
+    <ul>
+      <li><strong>Technical capability</strong> - Do we have the skills?</li>
+      <li><strong>Resource availability</strong> - Do we have time/budget?</li>
+      <li><strong>Operational capacity</strong> - Can we support it long-term?</li>
+      <li><strong>Build vs. Buy vs. Partner</strong> - What's most realistic?</li>
+    </ul>
+
+    <h3 id="test-3">Test 3: Core Institution Objectives</h3>
+    <p><em>Does this solution help achieve business goals (usually profitability, growth, mission)?</em></p>
+
+    <h3 id="test-4">Test 4: Product-Market Fit</h3>
+    <p><em>Do customers actually want this badly enough to use/pay for it?</em></p>
+    <div class="framework-box">
+      <p><strong>✅ Strong PMF Signals:</strong></p>
+      <ul>
+        <li>Users actively seek you out</li>
+        <li>High organic growth (word of mouth)</li>
+        <li>Users disappointed if product disappeared</li>
+        <li>High engagement and retention</li>
+      </ul>
+      <p><strong>The Sean Ellis Test:</strong></p>
+      <p>Ask users: "How would you feel if you could no longer use this product?"</p>
+      <ul>
+        <li><strong>&gt;40% say "Very disappointed"</strong> → Strong PMF ✅</li>
+        <li><strong>&lt;40% say "Very disappointed"</strong> → Weak PMF ❌</li>
+      </ul>
+    </div>
+
+    <h3 id="test-5">Test 5: SMART Goals</h3>
+    <p>Solutions must be <strong>S</strong>pecific, <strong>M</strong>easurable, <strong>A</strong>chievable, <strong>R</strong>elevant, <strong>T</strong>ime-bound</p>
+
+    <div class="example-box">
+      <p><strong>❌ Not SMART:</strong> "Make the app faster"</p>
+      <p><strong>✅ SMART:</strong> "Reduce checkout page load time from 3.2 seconds to under 2 seconds for 95% of users by end of Q2, by implementing image compression and code splitting"</p>
+    </div>
+
+    <h3 id="five-tests">🎯 Putting It All Together: The 5-Test Filter</h3>
+    <div class="framework-box">
+      <p>Use this as a checklist for EVERY solution you consider:</p>
+      <ul>
+        <li>□ Test 1: Do primary stakeholders want this?</li>
+        <li>□ Test 2: Can we actually build/maintain this?</li>
+        <li>□ Test 3: Does this serve our core objectives?</li>
+        <li>□ Test 4: Is there product-market fit?</li>
+        <li>□ Test 5: Is this SMART?</li>
+      </ul>
+      <p><strong>Passes all 5 tests? → PROCEED ✅</strong><br>
+      <strong>Fails any test? → REVISE or REJECT ❌</strong></p>
+    </div>
+
+    <div class="exercise-box">
+      <h4>💪 Final Practice Exercise: The 5-Test Evaluation</h4>
+      <p><strong>Scenario:</strong> You're PM for a budget hotel booking app in India.</p>
+      <p><strong>Proposed Solution:</strong> "Build an AI virtual concierge that uses AR to give hotel tours and answers questions in 10 Indian languages via voice."</p>
+      <p><strong>Your Task:</strong> Evaluate this solution through all 5 tests. Should you build this? Why or why not?</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2 id="module-summary">🎓 Module Summary: Key Takeaways</h2>
+
+    <h3>What Makes a Good Solution?</h3>
+    <ol>
+      <li><strong>Creative & Comprehensive</strong> - Consider all possibilities first</li>
+      <li><strong>Evidence-Based</strong> - Validated through research and testing</li>
+      <li><strong>User-Centered</strong> - Solves real problems for real people</li>
+      <li><strong>Strategically Aligned</strong> - Serves business objectives</li>
+      <li><strong>Realistically Feasible</strong> - Within capability to deliver</li>
+      <li><strong>Measurably Valuable</strong> - Has clear success metrics</li>
+    </ol>
+
+    <h3>The Solution Definition Process</h3>
+    <div class="framework-box">
+      <ol>
+        <li>Generate Many Solutions (HMW, "Let's" Framework)</li>
+        <li>Prioritize (RICE, MoSCoW)</li>
+        <li>Validate (Lean Canvas, Hypothesis Testing)</li>
+        <li>Plan (Roadmap, SMART Goals)</li>
+        <li>Test Reality (5-Test Filter)</li>
+        <li>Build & Learn</li>
+      </ol>
+    </div>
+
+    <h3>Golden Rules for Solutions</h3>
+    <ol>
+      <li><strong>Fall in love with the problem, not your solution</strong></li>
+      <li><strong>Solutions are hypotheses until validated</strong></li>
+      <li><strong>Perfect is the enemy of good</strong></li>
+      <li><strong>Think big, start small</strong></li>
+      <li><strong>Users don't want features, they want outcomes</strong></li>
+    </ol>
+
+    <h2 id="additional-resources">📚 Additional Resources for Deeper Learning</h2>
+
+    <h3>Books</h3>
+    <ul>
+      <li>"The Lean Startup" by Eric Ries - Hypothesis testing</li>
+      <li>"Inspired" by Marty Cagan - Product management frameworks</li>
+      <li>"Sprint" by Jake Knapp - Rapid solution testing</li>
+    </ul>
+
+    <h3>Frameworks to Explore Further</h3>
+    <ul>
+      <li>Jobs to Be Done (JTBD)</li>
+      <li>Value Proposition Canvas</li>
+      <li>Kano Model</li>
+      <li>ICE Scoring (simpler than RICE)</li>
+    </ul>
+
+    <h2 id="self-assessment">✅ Self-Assessment: Are You Ready?</h2>
+
+    <div class="exercise-box">
+      <p><strong>Test your understanding:</strong></p>
+      <ul>
+        <li>□ Can you generate 10+ solutions for any given problem?</li>
+        <li>□ Can you write a proper HMW question?</li>
+        <li>□ Can you categorize features using MoSCoW?</li>
+        <li>□ Can you calculate a RICE score?</li>
+        <li>□ Can you fill out a Lean Business Canvas?</li>
+        <li>□ Can you write a testable solution hypothesis?</li>
+        <li>□ Can you create a Now/Next/Later roadmap?</li>
+        <li>□ Can you evaluate a solution through the 5-test filter?</li>
+        <li>□ Can you explain WHY a solution is good/bad, not just that it is?</li>
+        <li>□ Can you think like a user, not just a builder?</li>
+      </ul>
+      <p><strong>If you checked most of these, you're ready to move forward! 🎉</strong></p>
+    </div>
+
+    <div class="story-box" style="margin-top: 40px; text-align: center;">
+      <h3>🎯 Final Thought</h3>
+      <blockquote style="border: none; padding: 0; font-size: 1.1em; margin: 20px 0;">
+        "The best product managers don't jump to solutions. They fall in love with problems, explore possibilities rigorously, validate ruthlessly, and only then commit to building. They know that the hardest part isn't building the right thing right—it's figuring out what the right thing is."
+      </blockquote>
+      <p style="font-weight: 600; margin-top: 20px;">Now go forth and solve real problems with great solutions! 💪</p>
+    </div>
+
+    <div class="footer">
+      <p>© 2025 Skillship AI. All rights reserved.</p>
+      <p>Module 3: Defining Solutions | Week 3, Class 2</p>
+    </div>
+  </main>
+
+  <script>
+    // Smooth scroll and active navigation highlighting
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          // Update active state
+          document.querySelectorAll('.nav-menu a').forEach(a => a.classList.remove('active'));
+          this.classList.add('active');
+        }
+      });
+    });
+
+    // Highlight active section on scroll
+    const sections = document.querySelectorAll('h2, h3[id]');
+    const navLinks = document.querySelectorAll('.nav-menu a');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (window.pageYOffset >= sectionTop - 200) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+
