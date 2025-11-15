@@ -136,8 +136,8 @@
       flex: 1;
       max-width: calc(100% - 320px);
       padding: 28px 36px;
-      font-size: 14px;
-      line-height: 1.6;
+      font-size: 15px;
+      line-height: 1.7;
     }
 
     .header {
@@ -147,22 +147,22 @@
     }
 
     .header h1 {
-      font-size: 1.8em;
-      font-weight: 800;
+      font-size: 1.75em;
+      font-weight: 700;
       margin-bottom: 12px;
       background: linear-gradient(135deg, #886df2 0%, #9b87f5 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      letter-spacing: -0.5px;
+      letter-spacing: -0.3px;
       line-height: 1.3;
     }
 
     .header h2 {
-      font-size: 1.1em;
+      font-size: 1em;
       font-weight: 400;
       color: #4a4a4a;
-      line-height: 1.4;
+      line-height: 1.5;
     }
 
     .header-badges {
@@ -180,7 +180,7 @@
       border-radius: 999px;
       background: linear-gradient(135deg, rgba(136, 109, 242, 0.14) 0%, rgba(155, 135, 245, 0.2) 100%);
       color: #5b4cc6;
-      font-size: 0.75em;
+      font-size: 0.8em;
       font-weight: 600;
       letter-spacing: 0.2px;
       text-transform: uppercase;
@@ -197,8 +197,8 @@
       font-size: 1.5em;
       margin-top: 40px;
       margin-bottom: 16px;
-      font-weight: 700;
-      letter-spacing: -0.3px;
+      font-weight: 600;
+      letter-spacing: -0.2px;
       background: linear-gradient(135deg, #886df2 0%, #9b87f5 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -207,15 +207,15 @@
     }
 
     h3 {
-      font-size: 1.2em;
-      margin-top: 28px;
+      font-size: 1.25em;
+      margin-top: 32px;
       margin-bottom: 14px;
       font-weight: 600;
       color: #2f2f2f;
     }
 
     h4 {
-      font-size: 1.05em;
+      font-size: 1.1em;
       margin-top: 24px;
       margin-bottom: 12px;
       font-weight: 600;
@@ -223,8 +223,8 @@
     }
 
     h5 {
-      font-size: 0.95em;
-      margin-top: 18px;
+      font-size: 1em;
+      margin-top: 20px;
       margin-bottom: 10px;
       font-weight: 600;
       color: #444;
@@ -233,7 +233,8 @@
     p {
       margin-bottom: 14px;
       color: #1a1a1a;
-      line-height: 1.65;
+      line-height: 1.7;
+      font-size: 1em;
     }
 
     ul, ol {
@@ -243,7 +244,8 @@
 
     li {
       margin-bottom: 10px;
-      line-height: 1.6;
+      line-height: 1.7;
+      font-size: 1em;
     }
 
     ul li::marker {
@@ -272,6 +274,29 @@
       padding: 20px;
       margin: 20px 0;
       page-break-inside: avoid;
+      font-size: 1em;
+      line-height: 1.7;
+    }
+
+    .disclaimer h3,
+    .story-box h3,
+    .framework-box h3,
+    .example-box h3,
+    .tip-box h3,
+    .exercise-box h3,
+    .disclaimer h4,
+    .story-box h4,
+    .framework-box h4,
+    .example-box h4,
+    .tip-box h4,
+    .exercise-box h4,
+    .disclaimer h5,
+    .story-box h5,
+    .framework-box h5,
+    .example-box h5,
+    .tip-box h5,
+    .exercise-box h5 {
+      margin-top: 0;
     }
 
     .disclaimer {
@@ -308,7 +333,7 @@
       width: 100%;
       border-collapse: collapse;
       margin: 18px 0;
-      font-size: 0.9em;
+      font-size: 0.95em;
     }
 
     table th,
@@ -317,6 +342,7 @@
       padding: 10px 12px;
       text-align: left;
       vertical-align: top;
+      line-height: 1.6;
     }
 
     table th {
@@ -367,7 +393,7 @@
       }
 
       .header h1 {
-        font-size: 1.6em;
+        font-size: 1.5em;
       }
     }
 
@@ -393,7 +419,7 @@
       padding: 2px 6px;
       border-radius: 4px;
       font-family: 'Courier New', monospace;
-      font-size: 0.9em;
+      font-size: 0.95em;
     }
 
     /* Blockquote style for examples */
@@ -403,6 +429,30 @@
       margin: 24px 0;
       font-style: italic;
       color: #555;
+      font-size: 1em;
+      line-height: 1.7;
+    }
+
+    /* Ensure consistent font sizes in nested elements */
+    .example-box p,
+    .framework-box p,
+    .story-box p,
+    .tip-box p,
+    .exercise-box p {
+      font-size: 1em;
+    }
+
+    .example-box ul,
+    .framework-box ul,
+    .story-box ul,
+    .tip-box ul,
+    .exercise-box ul,
+    .example-box ol,
+    .framework-box ol,
+    .story-box ol,
+    .tip-box ol,
+    .exercise-box ol {
+      font-size: 1em;
     }
   </style>
 </head>
@@ -546,11 +596,6 @@
     <div class="section-divider"></div>
 
     <h2 id="section-3-1">Section 3.1: The Problem Matrix</h2>
-    <div class="tip-box">
-      <h3>🎯 Tutor Instructions</h3>
-      <p><strong>Opening Question:</strong> "Imagine you're the PM at Zomato, and you get these complaints in one day: app crashes on older phones, vegetarian filter doesn't work, delivery tracking is inaccurate, restaurant photos are outdated, and payment takes too long. You can only fix one this month. Which one and why?"</p>
-      <p><strong>Analogy:</strong> "This is like a hospital emergency room. Not all patients can be treated first-come, first-served. You need triage based on urgency, severity, and resources required."</p>
-    </div>
 
     <h3 id="why-problem-matrix">3.1.1 Why We Need a Problem Matrix</h3>
     <p>
@@ -868,10 +913,10 @@
     <h3 id="calculating-score">3.1.3 Calculating the Total Priority Score</h3>
     <p>Once you've scored each problem on all three dimensions, calculating priority is simple:</p>
     <div class="framework-box">
-      <p style="font-size: 1.2em; text-align: center; margin: 24px 0;">
+      <p style="font-size: 1.1em; text-align: center; margin: 24px 0;">
         <strong>Priority Score = Spread + Severity + Frequency</strong>
       </p>
-      <ul style="text-align: center; list-style: none; padding: 0;">
+      <ul style="text-align: center; list-style: none; padding: 0; font-size: 1em;">
         <li>Maximum possible score: <strong>15</strong> (5+5+5)</li>
         <li>Minimum possible score: <strong>3</strong> (1+1+1)</li>
       </ul>
@@ -1428,7 +1473,7 @@
     </div>
 
     <div class="footer">
-      <p>© 2024 Skillship AI. All rights reserved.</p>
+      <p>© 2025 Skillship AI. All rights reserved.</p>
       <p>Module 3: Defining Problems & Market Research | Week 3, Class 1</p>
     </div>
   </main>
