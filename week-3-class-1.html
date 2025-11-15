@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skillship AI – Week 3, Class 1: Defining Problems & Market Research</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background-color: #ffffff;
+      color: #1a1a1a;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar Navigation (30%) */
+    .sidebar {
+      width: 30%;
+      min-width: 280px;
+      max-width: 360px;
+      background: linear-gradient(180deg, #f8f7ff 0%, #ffffff 100%);
+      border-right: 2px solid rgba(136, 109, 242, 0.15);
+      padding: 32px 24px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      z-index: 100;
+    }
+
+    .sidebar-header {
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 2px solid rgba(136, 109, 242, 0.2);
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+    }
+
+    .logo-text {
+      font-size: 1.3em;
+      font-weight: 700;
+      background: linear-gradient(135deg, #886df2 0%, #9b87f5 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.5px;
+    }
+
+    .sidebar-title {
+      font-size: 1.1em;
+      font-weight: 600;
+      color: #2f2f2f;
+      margin-bottom: 8px;
+    }
+
+    .sidebar-subtitle {
+      font-size: 0.9em;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .nav-menu {
+      list-style: none;
+      padding: 0;
+    }
+
+    .nav-menu li {
+      margin-bottom: 4px;
+    }
+
+    .nav-menu a {
+      display: block;
+      padding: 12px 16px;
+      color: #555;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 0.95em;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      border-left: 3px solid transparent;
+    }
+
+    .nav-menu a:hover {
+      background-color: rgba(136, 109, 242, 0.08);
+      color: #5b4cc6;
+      padding-left: 20px;
+    }
+
+    .nav-menu a.active {
+      background: linear-gradient(135deg, rgba(136, 109, 242, 0.12) 0%, rgba(155, 135, 245, 0.08) 100%);
+      color: #5b4cc6;
+      border-left-color: #9b87f5;
+      font-weight: 600;
+    }
+
+    .nav-section {
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(136, 109, 242, 0.1);
+    }
+
+    .nav-section-title {
+      font-size: 0.75em;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #9b87f5;
+      font-weight: 700;
+      margin-bottom: 12px;
+      padding-left: 16px;
+    }
+
+    /* Main Content Area (70%) */
+    .main-content {
+      flex: 1;
+      max-width: calc(100% - 360px);
+      padding: 48px 64px;
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    .header {
+      margin-bottom: 48px;
+      padding-bottom: 32px;
+      border-bottom: 3px solid #000;
+    }
+
+    .header h1 {
+      font-size: 2.4em;
+      font-weight: 800;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #886df2 0%, #9b87f5 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.8px;
+      line-height: 1.2;
+    }
+
+    .header h2 {
+      font-size: 1.3em;
+      font-weight: 400;
+      color: #4a4a4a;
+      line-height: 1.5;
+    }
+
+    .header-badges {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(136, 109, 242, 0.14) 0%, rgba(155, 135, 245, 0.2) 100%);
+      color: #5b4cc6;
+      font-size: 0.85em;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, h4, h5 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      color: #000;
+      page-break-after: avoid;
+    }
+
+    h2 {
+      font-size: 1.9em;
+      margin-top: 64px;
+      margin-bottom: 24px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #886df2 0%, #9b87f5 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      padding-top: 8px;
+    }
+
+    h3 {
+      font-size: 1.4em;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      font-weight: 600;
+      color: #2f2f2f;
+    }
+
+    h4 {
+      font-size: 1.15em;
+      margin-top: 32px;
+      margin-bottom: 16px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    h5 {
+      font-size: 1.05em;
+      margin-top: 24px;
+      margin-bottom: 12px;
+      font-weight: 600;
+      color: #444;
+    }
+
+    p {
+      margin-bottom: 20px;
+      color: #1a1a1a;
+      line-height: 1.8;
+    }
+
+    ul, ol {
+      margin: 20px 0;
+      padding-left: 32px;
+    }
+
+    li {
+      margin-bottom: 14px;
+      line-height: 1.75;
+    }
+
+    ul li::marker {
+      color: #9b87f5;
+    }
+
+    ol li::marker {
+      color: #886df2;
+      font-weight: 600;
+    }
+
+    .section-divider {
+      width: 100%;
+      height: 2px;
+      background: #e0e0e0;
+      margin: 56px 0;
+    }
+
+    .disclaimer,
+    .story-box,
+    .framework-box,
+    .example-box,
+    .tip-box,
+    .exercise-box {
+      border-radius: 12px;
+      padding: 32px;
+      margin: 32px 0;
+      page-break-inside: avoid;
+    }
+
+    .disclaimer {
+      background-color: #f5f5f5;
+      border-left: 4px solid #666;
+    }
+
+    .story-box {
+      background-color: #fafafa;
+      border: 1px solid #e0e0e0;
+    }
+
+    .framework-box {
+      background-color: #fff;
+      border: 2px solid #e8e8e8;
+    }
+
+    .example-box {
+      background-color: #f9f9f9;
+      border-left: 4px solid #333;
+    }
+
+    .tip-box {
+      background-color: #fffbf0;
+      border-left: 4px solid #ff9800;
+    }
+
+    .exercise-box {
+      background-color: #f0f8f0;
+      border-left: 4px solid #2e7d32;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 28px 0;
+      font-size: 0.95em;
+    }
+
+    table th,
+    table td {
+      border: 1px solid #dcdcdc;
+      padding: 14px 16px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    table th {
+      background: rgba(136, 109, 242, 0.1);
+      color: #5b4cc6;
+      font-weight: 600;
+    }
+
+    table tr:nth-child(even) {
+      background-color: #fafafa;
+    }
+
+    .highlight {
+      background-color: #fff9c4;
+      padding: 3px 8px;
+      border-radius: 3px;
+      font-weight: 500;
+      color: #000;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 80px;
+      padding-top: 40px;
+      border-top: 2px solid #e0e0e0;
+      color: #666;
+      font-size: 0.9em;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      body {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        position: relative;
+        border-right: none;
+        border-bottom: 2px solid rgba(136, 109, 242, 0.15);
+      }
+
+      .main-content {
+        max-width: 100%;
+        padding: 32px 24px;
+      }
+
+      .header h1 {
+        font-size: 2em;
+      }
+    }
+
+    @media print {
+      .sidebar {
+        display: none;
+      }
+
+      .main-content {
+        max-width: 100%;
+        padding: 20px;
+      }
+    }
+
+    /* Scroll behavior */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Code/technical content */
+    code {
+      background-color: #f5f5f5;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9em;
+    }
+
+    /* Blockquote style for examples */
+    blockquote {
+      border-left: 4px solid #9b87f5;
+      padding-left: 20px;
+      margin: 24px 0;
+      font-style: italic;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar Navigation -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo-section">
+        <img src="svglogo4.svg" alt="Skillship AI Logo" class="logo-icon" />
+        <div class="logo-text">Skillship AI</div>
+      </div>
+      <div class="sidebar-title">Week 3, Class 1</div>
+      <div class="sidebar-subtitle">Defining Problems & Market Research</div>
+    </div>
+
+    <nav>
+      <div class="nav-section">
+        <div class="nav-section-title">Module Overview</div>
+        <ul class="nav-menu">
+          <li><a href="#introduction">Introduction</a></li>
+          <li><a href="#why-matters">Why This Module Matters</a></li>
+          <li><a href="#skip-step">What Happens When You Skip</a></li>
+          <li><a href="#learning-objectives">Learning Objectives</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Section 3.1: Problem Matrix</div>
+        <ul class="nav-menu">
+          <li><a href="#why-problem-matrix">Why We Need a Problem Matrix</a></li>
+          <li><a href="#three-dimensions">Three Dimensions Explained</a></li>
+          <li><a href="#spread">Spread (Who is affected?)</a></li>
+          <li><a href="#severity">Severity (How much does it hurt?)</a></li>
+          <li><a href="#frequency">Frequency (How often?)</a></li>
+          <li><a href="#calculating-score">Calculating Priority Score</a></li>
+          <li><a href="#zomato-example">Zomato Worked Example</a></li>
+          <li><a href="#practice-exercise-1">Practice Exercise 1: Zerodha</a></li>
+          <li><a href="#common-mistakes">Common Mistakes PMs Make</a></li>
+          <li><a href="#practice-exercise-2">Practice Exercise 2: Urban Company</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Section 3.2: Market Research</div>
+        <ul class="nav-menu">
+          <li><a href="#market-research-intro">What is Market Research?</a></li>
+          <li><a href="#zepto-story">Zepto Success Story</a></li>
+          <li><a href="#two-types">Two Types of Research</a></li>
+          <li><a href="#opportunity-research">Opportunity Research</a></li>
+          <li><a href="#validation-research">Validation Research</a></li>
+        </ul>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="header" id="introduction">
+      <h1>MODULE 3: DEFINING PROBLEMS & MARKET RESEARCH</h1>
+      <h2>Master the frameworks that separate great PMs from average ones</h2>
+      <div class="header-badges">
+        <span class="badge">Week 3</span>
+        <span class="badge">Problem Prioritization</span>
+        <span class="badge">Market Research</span>
+      </div>
+    </div>
+
+    <div class="story-box">
+      <h3>Introduction</h3>
+      <p>
+        Imagine you're a PM at Swiggy, and users are complaining about delivery delays. Your CEO wants this "fixed immediately." But here's the thing – should you solve delivery delays for the 5% of orders during peak rain, or the payment failures affecting 15% of users daily? Without a systematic approach, you'll end up playing whack-a-mole with problems, building features nobody really needs, and burning through your team's time and energy.
+      </p>
+      <p>
+        This is why problem definition and market research form the foundation of product management. They're not just academic exercises – they're the difference between building the next Zomato and the next TinyOwl (remember them?).
+      </p>
+    </div>
+
+    <h2 id="why-matters">Why This Module Matters for PMs</h2>
+    <div class="framework-box">
+      <p>
+        As a product manager, you're essentially a professional problem-solver. But here's what separates great PMs from average ones:
+      </p>
+      <ul>
+        <li><strong>Great PMs solve the RIGHT problems</strong> – the ones that matter most to users and business</li>
+        <li><strong>Average PMs solve the LOUDEST problems</strong> – whatever the CEO or vocal customers are shouting about</li>
+      </ul>
+      <p>
+        Consider Paytm's journey. In 2015, they could have focused on 50 different problems: Better UX, more payment options, faster transactions, loyalty programs, or merchant onboarding. But they prioritized demonetization readiness – a problem most competitors ignored. When demonetization hit in November 2016, Paytm was ready while others scrambled. That singular focus on the RIGHT problem made them the dominant player.
+      </p>
+    </div>
+
+    <h2 id="skip-step">What Happens When You Skip This Step</h2>
+    <div class="example-box">
+      <h3>Case Study: Google+ (The $585 Million Mistake)</h3>
+      <p><strong>What they built:</strong> A Facebook competitor with circles, hangouts, and social features</p>
+      <p><strong>What they assumed:</strong> "People want better privacy controls in social media"</p>
+      <p><strong>What they didn't research:</strong> Whether users would switch from Facebook for privacy alone</p>
+      <p><strong>The reality:</strong> Users wanted convenience and network effects, not just privacy</p>
+      <p><strong>Result:</strong> Shut down in 2019 after burning $585 million</p>
+    </div>
+
+    <div class="example-box">
+      <h3>Indian Example: TinyOwl Food Delivery</h3>
+      <p><strong>What they built:</strong> Food delivery with focus on SMS-based ordering</p>
+      <p><strong>What they assumed:</strong> "Users want to order food via SMS instead of apps"</p>
+      <p><strong>What they didn't research:</strong> User preference for visual menus and app-based ordering</p>
+      <p><strong>The reality:</strong> Users wanted to SEE food photos, not just read SMS menus</p>
+      <p><strong>Result:</strong> Acquired by Roadrunnr (later shut down). Swiggy won with visual, app-first approach</p>
+    </div>
+
+    <p>
+      Both companies had talented teams, good funding, and strong execution. But they built solutions for problems that either didn't exist or weren't important enough for users to change their behavior.
+    </p>
+
+    <h3 id="connection-module">Connection to Product vs Service Module</h3>
+    <p>
+      Remember from Module 2 that products scale by standardization while services win through personalization? The same logic applies to problems:
+    </p>
+    <ul>
+      <li><strong>Product problems</strong> affect many users in similar ways (Netflix buffering, Zerodha app crashes)</li>
+      <li><strong>Service problems</strong> are often individual and contextual (Urban Company's beautician is late for one customer)</li>
+    </ul>
+    <p>
+      Your problem prioritization framework needs to account for this. A problem affecting 1000 product users might be more important than a service issue affecting 10 clients, even if those 10 clients are very vocal.
+    </p>
+
+    <h2 id="learning-objectives">Learning Objectives</h2>
+    <div class="framework-box">
+      <p>By the end of this module, you'll be able to:</p>
+      <ol>
+        <li><strong>Problem Matrix:</strong> Score and prioritize problems using Spread, Severity, and Frequency dimensions</li>
+        <li><strong>Market Research:</strong> Conduct both opportunity research (is there a market?) and validation research (will they use my solution?)</li>
+        <li><strong>TAM-SAM-SOM:</strong> Calculate realistic market size and set achievable user acquisition targets</li>
+        <li><strong>Integration:</strong> Use all three frameworks together to make confident go/no-go decisions on product ideas</li>
+      </ol>
+      <p>
+        Think of these as your PM toolkit for the most critical question in product management: <strong>"What should we build next, and why?"</strong>
+      </p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2 id="section-3-1">Section 3.1: The Problem Matrix</h2>
+    <div class="tip-box">
+      <h3>🎯 Tutor Instructions</h3>
+      <p><strong>Opening Question:</strong> "Imagine you're the PM at Zomato, and you get these complaints in one day: app crashes on older phones, vegetarian filter doesn't work, delivery tracking is inaccurate, restaurant photos are outdated, and payment takes too long. You can only fix one this month. Which one and why?"</p>
+      <p><strong>Analogy:</strong> "This is like a hospital emergency room. Not all patients can be treated first-come, first-served. You need triage based on urgency, severity, and resources required."</p>
+    </div>
+
+    <h3 id="why-problem-matrix">3.1.1 Why We Need a Problem Matrix</h3>
+    <p>
+      Let's start with a real scenario that every PM faces. You're the product manager at Swiggy, and your support team forwards you this week's top user complaints:
+    </p>
+    <ul>
+      <li>"App crashes when I try to reorder from history" (47 complaints)</li>
+      <li>"Can't find restaurants that deliver to my office" (23 complaints)</li>
+      <li>"Delivery partner called, but I couldn't understand their language" (156 complaints)</li>
+      <li>"Food arrived cold because tracking was wrong" (89 complaints)</li>
+      <li>"Can't split payment between card and wallet" (12 complaints)</li>
+    </ul>
+    <p>Your engineering team can fix exactly ONE of these problems in this sprint. Which one do you choose?</p>
+    <p>
+      Your gut might say "the one with most complaints" (language barrier with delivery partners). But what if those 156 complaints came from just 20 users who are very vocal on social media? What if the reorder crash affects 40% of your power users who order daily, but they're not complaining – they're just quietly switching to Zomato?
+    </p>
+    <p>
+      This is why we need objective prioritization. The Problem Matrix framework helps you move beyond gut feelings and vocal minorities to make data-driven decisions about which problems truly deserve your team's attention.
+    </p>
+
+    <h4>The Cost of Solving Wrong Problems First</h4>
+    <div class="example-box">
+      <h4>📊 Real Example: Paytm's 2017 Priority Mistake</h4>
+      <p>After demonetization, Paytm had two major problems to solve:</p>
+      <ul>
+        <li><strong>Problem A:</strong> App crashes during peak payment hours (affected 30% of users, happened daily during 7-9 PM)</li>
+        <li><strong>Problem B:</strong> Difficulty adding money to wallet via net banking (affected 5% of users, but they were high-value customers)</li>
+      </ul>
+      <p><strong>What they prioritized:</strong> Problem B (because high-value customers were calling and complaining)</p>
+      <p><strong>What happened:</strong> Lost millions of regular users to PhonePe and Google Pay during peak hours when the app crashed</p>
+      <p><strong>Learning:</strong> Vocal, high-value customers aren't always your biggest problem</p>
+    </div>
+
+    <p>When you solve the wrong problem first, you face a triple penalty:</p>
+    <ul>
+      <li><strong>Opportunity Cost:</strong> You didn't solve the right problem, so users are still frustrated</li>
+      <li><strong>Resource Waste:</strong> Your engineering team spent weeks on something with limited impact</li>
+      <li><strong>Time Delay:</strong> The real problem gets worse while you're distracted</li>
+    </ul>
+
+    <h4>Objective vs Subjective Prioritization</h4>
+    <p>Most PMs prioritize problems subjectively:</p>
+    <ul>
+      <li>"The CEO mentioned this in the meeting" (HiPPO syndrome)</li>
+      <li>"This user tweeted about it" (squeaky wheel syndrome)</li>
+      <li>"I personally face this problem" (personal bias)</li>
+      <li>"This seems technically interesting" (engineering bias)</li>
+    </ul>
+    <p>
+      The Problem Matrix forces you to be objective by scoring every problem on the same three dimensions: <strong>Spread</strong> (who's affected), <strong>Severity</strong> (how much it hurts), and <strong>Frequency</strong> (how often it happens).
+    </p>
+
+    <h3 id="three-dimensions">3.1.2 The Three Dimensions Explained</h3>
+
+    <h4 id="spread">SPREAD (Who is affected?)</h4>
+    <p><strong>Definition:</strong> How many users or customers face this problem as a percentage of your total user base.</p>
+    <p>
+      Spread is about scope, not absolute numbers. A problem affecting 10,000 users sounds big, but if you have 10 million users, that's only 0.1% spread – relatively small.
+    </p>
+
+    <div class="framework-box">
+      <h4>Spread Scoring Guide (1-5 scale):</h4>
+      <ul>
+        <li><strong>1</strong> = Very few users (< 1% of user base)</li>
+        <li><strong>2</strong> = Small segment (1-5% of users)</li>
+        <li><strong>3</strong> = Moderate segment (5-20% of users)</li>
+        <li><strong>4</strong> = Large segment (20-50% of users)</li>
+        <li><strong>5</strong> = Majority/nearly all users (>50%)</li>
+      </ul>
+    </div>
+
+    <h5>📱 Real Examples with Spread Scoring:</h5>
+    <div class="example-box">
+      <p><strong>Swiggy: "Can't find vegetarian filter"</strong></p>
+      <ul>
+        <li><strong>Analysis:</strong> 40% of Indian population is vegetarian, and most Swiggy users are urban Indians</li>
+        <li><strong>Data source:</strong> User surveys + usage analytics</li>
+        <li><strong>Spread Score: 4</strong> (affects large segment - 40% of users)</li>
+      </ul>
+    </div>
+
+    <div class="example-box">
+      <p><strong>Zerodha: "App crashes on iOS 14"</strong></p>
+      <ul>
+        <li><strong>Analysis:</strong> Only 3% of Zerodha users use iOS 14 (most use Android or older iOS)</li>
+        <li><strong>Data source:</strong> Device analytics from app crashes</li>
+        <li><strong>Spread Score: 2</strong> (affects small segment - 3% of users)</li>
+      </ul>
+    </div>
+
+    <div class="example-box">
+      <p><strong>Urban Company: "No AC repair option"</strong></p>
+      <ul>
+        <li><strong>Analysis:</strong> 15% of users search for AC services, mostly seasonal (summer months)</li>
+        <li><strong>Data source:</strong> Search queries and seasonal patterns</li>
+        <li><strong>Spread Score: 3</strong> (affects moderate segment - 15% of users)</li>
+      </ul>
+    </div>
+
+    <h5>How to Measure Spread</h5>
+    <p>You need data, not guesses. Here's how to get it:</p>
+    <ul>
+      <li><strong>User Analytics:</strong> How many users hit the problematic feature/flow?</li>
+      <li><strong>Support Tickets:</strong> What percentage of users report this issue?</li>
+      <li><strong>Surveys:</strong> Ask a representative sample if they face this problem</li>
+      <li><strong>User Interviews:</strong> Deep-dive with 15-20 users across different segments</li>
+      <li><strong>A/B Tests:</strong> Test with a small group to measure impact</li>
+    </ul>
+
+    <div class="tip-box">
+      <h5>⚠️ Common Mistake: Confusing Vocal Minority with Actual Spread</h5>
+      <p><strong>Scenario:</strong> 100 users tweet angrily about a missing feature</p>
+      <p><strong>Wrong conclusion:</strong> "This affects lots of users" (because they're loud)</p>
+      <p><strong>Right approach:</strong> Check if those 100 represent 100 out of 1,000 users (10% spread) or 100 out of 100,000 users (0.1% spread)</p>
+      <p><strong>Key learning:</strong> Volume of complaints ≠ Spread. Always measure against your total user base.</p>
+    </div>
+
+    <h4 id="severity">SEVERITY (How much does it hurt?)</h4>
+    <p><strong>Definition:</strong> The impact on a user when they encounter this problem. Think emotional pain + functional disruption.</p>
+    <p>
+      Severity isn't just about whether the app works or not. It's about how much the problem disrupts the user's intended goal and their emotional state.
+    </p>
+
+    <div class="framework-box">
+      <h4>Severity Scoring Guide (1-5 scale):</h4>
+      <ul>
+        <li><strong>1</strong> = Minor annoyance (user barely notices, continues using)</li>
+        <li><strong>2</strong> = Slight inconvenience (user finds workaround, mild frustration)</li>
+        <li><strong>3</strong> = Moderate pain (user frustrated but continues using)</li>
+        <li><strong>4</strong> = Major pain (user considers leaving, significant frustration)</li>
+        <li><strong>5</strong> = Critical (user cannot complete task/loses money/data)</li>
+      </ul>
+    </div>
+
+    <h5>💔 Real Examples with Severity Scoring:</h5>
+    <div class="example-box">
+      <p><strong>Swiggy: "App crashes during payment"</strong></p>
+      <ul>
+        <li><strong>Functional impact:</strong> User cannot complete their order</li>
+        <li><strong>Emotional impact:</strong> Frustration, anxiety (especially if hungry), loss of trust</li>
+        <li><strong>Business impact:</strong> Lost order, user might switch to Zomato</li>
+        <li><strong>Severity Score: 5</strong> (critical - task cannot be completed)</li>
+      </ul>
+    </div>
+
+    <div class="example-box">
+      <p><strong>Paytm: "Wrong font color in settings menu"</strong></p>
+      <ul>
+        <li><strong>Functional impact:</strong> None - all features work normally</li>
+        <li><strong>Emotional impact:</strong> Barely noticeable, maybe looks slightly unprofessional</li>
+        <li><strong>Business impact:</strong> Zero</li>
+        <li><strong>Severity Score: 1</strong> (minor annoyance)</li>
+      </ul>
+    </div>
+
+    <div class="example-box">
+      <p><strong>Zerodha: "Stock prices delayed by 2 seconds"</strong></p>
+      <ul>
+        <li><strong>Functional impact:</strong> Traders make decisions on old data</li>
+        <li><strong>Emotional impact:</strong> High stress, feeling of losing money</li>
+        <li><strong>Business impact:</strong> Users lose money, might switch to other trading apps</li>
+        <li><strong>Severity Score: 4</strong> (major pain - financial loss possible)</li>
+      </ul>
+    </div>
+
+    <h5>Emotional vs Functional Severity</h5>
+    <p>
+      Don't underestimate emotional severity. Sometimes a "small" functional problem creates massive emotional pain.
+    </p>
+    <div class="example-box">
+      <h5>Case Study: Instagram Story Upload Failure</h5>
+      <ul>
+        <li><strong>Functional impact:</strong> Medium - users can still post to feed, just not Stories</li>
+        <li><strong>Emotional impact:</strong> HIGH - users feel excluded from real-time social sharing</li>
+        <li><strong>Why emotional severity matters:</strong> Stories are about "in-the-moment" sharing. When it fails, users feel they've lost that moment forever. This emotional pain drives them to Snapchat or other platforms immediately.</li>
+      </ul>
+      <p><strong>Learning:</strong> Consider the CONTEXT of the user's goal, not just the technical impact</p>
+    </div>
+
+    <h5>B2B vs B2C Severity Differences</h5>
+    <p>The same problem can have different severity in different contexts:</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Problem</th>
+          <th>B2C Context</th>
+          <th>B2B Context</th>
+          <th>Why Different?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Login failure</td>
+          <td>Severity: 2-3<br>(User tries again later)</td>
+          <td>Severity: 4-5<br>(Employee can't work)</td>
+          <td>B2B users have deadlines, bosses, and no alternatives</td>
+        </tr>
+        <tr>
+          <td>Slow loading (5 seconds)</td>
+          <td>Severity: 2<br>(User waits or leaves)</td>
+          <td>Severity: 4<br>(Impacts productivity)</td>
+          <td>B2B users use the tool 8 hours/day, every second counts</td>
+        </tr>
+        <tr>
+          <td>Data export fails</td>
+          <td>Severity: 1-2<br>(Nice to have)</td>
+          <td>Severity: 5<br>(Can't complete job)</td>
+          <td>B2B users often need data for reports, presentations, compliance</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="tip-box">
+      <h5>⚠️ Common Mistake: PMs Underestimate Emotional Severity</h5>
+      <p><strong>Example:</strong> Dating app photo upload fails occasionally</p>
+      <p><strong>PM thinking:</strong> "It's just a photo, they can try again" (Severity = 2)</p>
+      <p><strong>User reality:</strong> "I saw someone I wanted to match with, uploaded my best photo to impress them, and it failed. Now they're gone from my feed forever" (Severity = 4)</p>
+      <p><strong>Key learning:</strong> Always consider the user's emotional state and context when scoring severity</p>
+    </div>
+
+    <h4 id="frequency">FREQUENCY (How often does it happen?)</h4>
+    <p><strong>Definition:</strong> How often users encounter this problem. This includes both individual frequency (how often each user hits it) and aggregate frequency (how many users hit it daily across your entire base).</p>
+
+    <div class="framework-box">
+      <h4>Frequency Scoring Guide (1-5 scale):</h4>
+      <ul>
+        <li><strong>1</strong> = Rare (once a year or less per user)</li>
+        <li><strong>2</strong> = Occasional (few times a year per user)</li>
+        <li><strong>3</strong> = Regular (monthly per user)</li>
+        <li><strong>4</strong> = Frequent (weekly per user)</li>
+        <li><strong>5</strong> = Very frequent (daily or every use)</li>
+      </ul>
+    </div>
+
+    <h5>⏰ Real Examples with Frequency Scoring:</h5>
+    <div class="example-box">
+      <p><strong>Swiggy: "Can't reorder from history"</strong></p>
+      <ul>
+        <li><strong>Individual frequency:</strong> Power users want to reorder 2-3 times per week</li>
+        <li><strong>Usage context:</strong> When users find a restaurant they like, they reorder frequently</li>
+        <li><strong>Frequency Score: 4</strong> (frequent - weekly need for affected users)</li>
+      </ul>
+    </div>
+
+    <div class="example-box">
+      <p><strong>Ola: "Cab cancellation after booking"</strong></p>
+      <ul>
+        <li><strong>Individual frequency:</strong> Happens to each user once every month on average</li>
+        <li><strong>Usage context:</strong> Peak hours, bad weather, remote locations</li>
+        <li><strong>Frequency Score: 3</strong> (regular - monthly occurrence)</li>
+      </ul>
+    </div>
+
+    <div class="example-box">
+      <p><strong>Amazon: "Cannot edit review after posting"</strong></p>
+      <ul>
+        <li><strong>Individual frequency:</strong> Most users never need to edit reviews; those who do need it rarely</li>
+        <li><strong>Usage context:</strong> Only when user makes mistake or product changes after review</li>
+        <li><strong>Frequency Score: 1</strong> (rare - once a year or less)</li>
+      </ul>
+    </div>
+
+    <h5>Usage Patterns Matter</h5>
+    <p>The same problem can have different frequency for different user segments:</p>
+    <div class="example-box">
+      <h5>Case Study: Zerodha "Portfolio sync lag"</h5>
+      <ul>
+        <li><strong>For casual investors:</strong> Check portfolio once a week → Frequency = 3</li>
+        <li><strong>For active traders:</strong> Check portfolio 50 times a day → Frequency = 5</li>
+      </ul>
+      <p><strong>PM Decision:</strong> Even if casual investors are 80% of users, if active traders generate 60% of revenue, you weight the frequency toward the active trader experience.</p>
+      <p><strong>Key learning:</strong> Consider both user volume AND business value when scoring frequency</p>
+    </div>
+
+    <h5>Segment-Specific Frequency</h5>
+    <p>Always ask: "Frequency for which users?" Different segments use your product differently:</p>
+    <table>
+      <thead>
+        <tr>
+          <th>User Segment</th>
+          <th>Swiggy Usage</th>
+          <th>"Delivery Tracking Inaccurate" Frequency</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Daily orderers</td>
+          <td>Order 7x/week</td>
+          <td>Score: 5 (hit it daily)</td>
+        </tr>
+        <tr>
+          <td>Weekend orderers</td>
+          <td>Order 2x/week</td>
+          <td>Score: 4 (hit it weekly)</td>
+        </tr>
+        <tr>
+          <td>Occasional orderers</td>
+          <td>Order 2x/month</td>
+          <td>Score: 3 (hit it monthly)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="tip-box">
+      <h5>⚠️ Common Mistake: Global Average Hides Power User Pain</h5>
+      <p><strong>Example:</strong> "App logout" problem</p>
+      <ul>
+        <li><strong>Average frequency:</strong> 0.1 times per month per user (looks low)</li>
+        <li><strong>Hidden reality:</strong> 5% of users (power users) get logged out 5 times per day</li>
+        <li><strong>Why this matters:</strong> Those 5% might be your most valuable users who generate 40% of revenue</li>
+      </ul>
+      <p><strong>Right approach:</strong> Segment frequency analysis, not just global averages</p>
+    </div>
+
+    <h3 id="calculating-score">3.1.3 Calculating the Total Priority Score</h3>
+    <p>Once you've scored each problem on all three dimensions, calculating priority is simple:</p>
+    <div class="framework-box">
+      <p style="font-size: 1.2em; text-align: center; margin: 24px 0;">
+        <strong>Priority Score = Spread + Severity + Frequency</strong>
+      </p>
+      <ul style="text-align: center; list-style: none; padding: 0;">
+        <li>Maximum possible score: <strong>15</strong> (5+5+5)</li>
+        <li>Minimum possible score: <strong>3</strong> (1+1+1)</li>
+      </ul>
+    </div>
+
+    <h4>Priority Interpretation Guide</h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Score Range</th>
+          <th>Priority Level</th>
+          <th>Action</th>
+          <th>Timeline</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>13-15</td>
+          <td>Critical Priority</td>
+          <td>Drop everything, fix immediately</td>
+          <td>This sprint</td>
+        </tr>
+        <tr>
+          <td>10-12</td>
+          <td>High Priority</td>
+          <td>Plan for next sprint</td>
+          <td>Within month</td>
+        </tr>
+        <tr>
+          <td>7-9</td>
+          <td>Medium Priority</td>
+          <td>Add to next quarter roadmap</td>
+          <td>Within 3 months</td>
+        </tr>
+        <tr>
+          <td>4-6</td>
+          <td>Low Priority</td>
+          <td>Add to backlog</td>
+          <td>When convenient</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Ignore</td>
+          <td>Don't solve (or delete from backlog)</td>
+          <td>Never</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4>Why This Scoring System Works</h4>
+    <p>The beauty of adding (not multiplying) the three dimensions is that it balances different types of problems:</p>
+    <ul>
+      <li><strong>High spread, low severity:</strong> Many users affected slightly (like cosmetic bugs)</li>
+      <li><strong>Low spread, high severity:</strong> Few users affected badly (like edge case crashes)</li>
+      <li><strong>High frequency compensates for lower spread/severity:</strong> Small problems that happen daily add up</li>
+    </ul>
+
+    <h3 id="zomato-example">3.1.4 Complete Worked Example: Zomato Food Delivery</h3>
+    <p>Let's walk through a real PM scenario step by step.</p>
+    <div class="story-box">
+      <h4>🍕 Scenario: Zomato PM's Weekly Problem Triage</h4>
+      <p>
+        You're a PM at Zomato. Your support team, user research, and analytics have identified these 5 problems from user feedback this week. You can fix only the top 2 this quarter. Which ones and why?
+      </p>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Problem</th>
+          <th>Description & Analysis</th>
+          <th>Spread</th>
+          <th>Severity</th>
+          <th>Frequency</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Problem 1:</strong><br>Search doesn't show newly opened restaurants</td>
+          <td>
+            <strong>User Impact:</strong> Users miss trying new places but can still order from known restaurants<br><br>
+            <strong>Measurement:</strong> 35% of active users search for "new" or "recently opened" restaurants monthly<br><br>
+            <strong>Context:</strong> Users want variety, but this doesn't block core functionality
+          </td>
+          <td><strong>4</strong><br>(Large segment - 35% is significant portion of user base)</td>
+          <td><strong>2</strong><br>(Slight inconvenience - users can still order, just miss discovery)</td>
+          <td><strong>3</strong><br>(Regular - users search for new places every 2 weeks)</td>
+          <td><strong>9</strong><br>(Medium priority)</td>
+        </tr>
+        <tr>
+          <td><strong>Problem 2:</strong><br>Payment fails but money deducted</td>
+          <td>
+            <strong>User Impact:</strong> User loses money temporarily, has to call support, order cancelled, creates trust issue<br><br>
+            <strong>Measurement:</strong> Affects 3% of transactions, but 15% of users experienced it in last month due to multiple payment attempts<br><br>
+            <strong>Context:</strong> Creates massive trust issues with payments
+          </td>
+          <td><strong>3</strong><br>(Moderate segment - 15% of users affected monthly)</td>
+          <td><strong>5</strong><br>(Critical - money loss + trust issue + order failure)</td>
+          <td><strong>2</strong><br>(Occasional - once it happens, users avoid that payment method)</td>
+          <td><strong>10</strong><br>(High priority)</td>
+        </tr>
+        <tr>
+          <td><strong>Problem 3:</strong><br>Can't filter by "open now"</td>
+          <td>
+            <strong>User Impact:</strong> Users waste time browsing closed restaurants, get frustrated, especially during off-hours<br><br>
+            <strong>Measurement:</strong> 50% of app opens happen outside standard meal times when many restaurants are closed<br><br>
+            <strong>Context:</strong> Happens every time user opens app at wrong time
+          </td>
+          <td><strong>5</strong><br>(Majority - affects most users who browse outside meal times)</td>
+          <td><strong>3</strong><br>(Moderate pain - frustration but can eventually find open restaurants)</td>
+          <td><strong>5</strong><br>(Very frequent - happens daily for off-hours users)</td>
+          <td><strong>13</strong><br>(Critical priority)</td>
+        </tr>
+        <tr>
+          <td><strong>Problem 4:</strong><br>Delivery person contact button hard to find</td>
+          <td>
+            <strong>User Impact:</strong> When users need to contact delivery partner (delayed order, wrong address), they can't find the button easily<br><br>
+            <strong>Measurement:</strong> Only 5% of users ever need to contact delivery partner<br><br>
+            <strong>Context:</strong> When needed, it's urgent and stressful
+          </td>
+          <td><strong>2</strong><br>(Small segment - most users never need this feature)</td>
+          <td><strong>4</strong><br>(Major pain - when you need it, you REALLY need it urgently)</td>
+          <td><strong>2</strong><br>(Occasional - only when there's a delivery issue)</td>
+          <td><strong>8</strong><br>(Medium priority)</td>
+        </tr>
+        <tr>
+          <td><strong>Problem 5:</strong><br>Dark mode text color slightly off</td>
+          <td>
+            <strong>User Impact:</strong> Purely cosmetic issue in dark mode, no functional impact<br><br>
+            <strong>Measurement:</strong> 20% use dark mode, of those only 10% notice the issue (2% of total user base)<br><br>
+            <strong>Context:</strong> Affects reading experience for small segment
+          </td>
+          <td><strong>1</strong><br>(Very few - only 2% of total users affected)</td>
+          <td><strong>1</strong><br>(Minor annoyance - purely cosmetic, doesn't affect functionality)</td>
+          <td><strong>4</strong><br>(Frequent - dark mode users see it every time they use the app)</td>
+          <td><strong>6</strong><br>(Low priority)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4>PM Decision Making Process</h4>
+    <p>Based on the scores, here's how you'd prioritize:</p>
+    <div class="framework-box">
+      <h5>Fix Problem 3 first (Score: 13) - "Open now" filter</h5>
+      <ul>
+        <li><strong>Why:</strong> Affects majority of users (50%) with high frequency (daily)</li>
+        <li><strong>Business impact:</strong> Reduces time to order, improves user experience significantly</li>
+        <li><strong>Effort vs impact:</strong> Relatively simple feature with massive user benefit</li>
+      </ul>
+
+      <h5>Fix Problem 2 second (Score: 10) - Payment failures</h5>
+      <ul>
+        <li><strong>Why:</strong> Critical severity (money + trust issues) cannot be ignored</li>
+        <li><strong>Business impact:</strong> Lost orders + user churn + support costs</li>
+        <li><strong>Risk:</strong> Payment issues compound over time, get worse if ignored</li>
+      </ul>
+
+      <h5>Plan Problem 1 and 4 for next quarter</h5>
+      <ul>
+        <li>Both scored 8-9, solid medium priority</li>
+        <li>Important but not urgent compared to top 2</li>
+      </ul>
+
+      <h5>Ignore Problem 5 (Score: 6) - Dark mode color</h5>
+      <ul>
+        <li>Low impact despite affecting daily usage</li>
+        <li>Engineering time better spent on higher-impact problems</li>
+      </ul>
+    </div>
+
+    <h4>Why This Ordering Makes Business Sense</h4>
+    <div class="example-box">
+      <h5>Problem 3 vs Problem 2 - Why "Open Now" beats "Payment Failure"?</h5>
+      <p><strong>Aggregate Impact Analysis:</strong></p>
+      <ul>
+        <li><strong>Problem 3:</strong> 50% users × daily occurrence = affects 500,000 users daily (if 1M daily active users)</li>
+        <li><strong>Problem 2:</strong> 15% users × occasional = affects 150,000 users monthly</li>
+      </ul>
+      <p><strong>Business Impact:</strong></p>
+      <ul>
+        <li><strong>Problem 3:</strong> Improves daily experience for majority → higher retention</li>
+        <li><strong>Problem 2:</strong> Prevents churn for smaller segment → reduces losses</li>
+      </ul>
+      <p><strong>PM Reasoning:</strong> Both are important, but Problem 3 has higher aggregate impact. However, you'd fix Problem 2 immediately after because trust issues compound rapidly.</p>
+    </div>
+
+    <h3 id="practice-exercise-1">3.1.5 Practice Exercise 1: Score These Problems</h3>
+    <div class="exercise-box">
+      <h4>🏋️‍♂️ Exercise: Zerodha Problem Prioritization</h4>
+      <p>
+        You're a PM at Zerodha (India's largest stock trading platform). Your team has identified these 5 problems from user feedback and analytics. Score each problem and decide your priority order.
+      </p>
+      <p><strong>Context:</strong> Zerodha has 6M users, mostly retail traders. 60% use mobile app, 40% use web. Revenue comes from brokerage fees per trade.</p>
+
+      <h5>Problems to Score:</h5>
+      <ol>
+        <li>
+          <strong>Mobile app logs out users every 2 hours</strong><br>
+          <em>Hint:</em> Consider how often users trade, importance of staying logged in, security vs convenience<br>
+          <em>Think:</em> What % use mobile? How often do they trade? Impact of re-login during market hours?
+        </li>
+        <li>
+          <strong>Cannot set price alerts for penny stocks</strong><br>
+          <em>Hint:</em> What % of traders trade penny stocks? How important are price alerts? Regulatory restrictions?<br>
+          <em>Think:</em> Is this a niche need or mainstream? How often do penny stock traders need alerts?
+        </li>
+        <li>
+          <strong>Kite web platform crashes when user views 50+ stocks in watchlist</strong><br>
+          <em>Hint:</em> What % of users have large watchlists? What happens when it crashes? Are these power users?<br>
+          <em>Think:</em> Edge case or common usage? Impact on trading activity? Revenue impact?
+        </li>
+        <li>
+          <strong>No way to see historical dividend data for stocks</strong><br>
+          <em>Hint:</em> What % of users are long-term investors vs day traders? How critical is dividend data?<br>
+          <em>Think:</em> Is this blocking trades? How often needed? Available elsewhere?
+        </li>
+        <li>
+          <strong>Chart colors are not colorblind-friendly</strong><br>
+          <em>Hint:</em> What % of population is colorblind? Can they still trade? Impact on decision-making?<br>
+          <em>Think:</em> Accessibility vs business impact? Workarounds available?
+        </li>
+      </ol>
+
+      <h5>Your Task:</h5>
+      <ul>
+        <li>Score each problem on Spread (1-5), Severity (1-5), Frequency (1-5)</li>
+        <li>Calculate total score for each</li>
+        <li>Rank them in priority order</li>
+        <li>Explain your reasoning for the top 2 priorities</li>
+      </ul>
+    </div>
+
+    <h4>Model Answers & Detailed Analysis</h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Problem</th>
+          <th>Spread Analysis</th>
+          <th>Severity Analysis</th>
+          <th>Frequency Analysis</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1. App logout every 2 hours</strong></td>
+          <td><strong>Score: 4</strong><br>60% use mobile app × 80% active traders = 48% affected</td>
+          <td><strong>Score: 4</strong><br>Major pain - losing login during market hours can cost money, high frustration</td>
+          <td><strong>Score: 5</strong><br>Active traders use app 4-6 hours daily, face this 2-3 times per session</td>
+          <td><strong>13</strong><br>Critical Priority</td>
+        </tr>
+        <tr>
+          <td><strong>2. No penny stock alerts</strong></td>
+          <td><strong>Score: 2</strong><br>~5% of retail traders focus on penny stocks</td>
+          <td><strong>Score: 3</strong><br>Moderate pain - they miss price movements but can use other methods</td>
+          <td><strong>Score: 4</strong><br>Penny stock traders set alerts frequently (weekly)</td>
+          <td><strong>9</strong><br>Medium Priority</td>
+        </tr>
+        <tr>
+          <td><strong>3. Web crashes with 50+ watchlist</strong></td>
+          <td><strong>Score: 2</strong><br>~3% of users have 50+ stocks (power users)</td>
+          <td><strong>Score: 5</strong><br>Critical - crash during market hours = can't trade = money loss</td>
+          <td><strong>Score: 4</strong><br>Power users check watchlists multiple times daily</td>
+          <td><strong>11</strong><br>High Priority</td>
+        </tr>
+        <tr>
+          <td><strong>4. No dividend history</strong></td>
+          <td><strong>Score: 3</strong><br>~15% are long-term investors who care about dividends</td>
+          <td><strong>Score: 2</strong><br>Slight inconvenience - data available elsewhere, not blocking trades</td>
+          <td><strong>Score: 2</strong><br>Occasional - mainly during earnings season or stock research</td>
+          <td><strong>7</strong><br>Medium Priority</td>
+        </tr>
+        <tr>
+          <td><strong>5. Colorblind-unfriendly charts</strong></td>
+          <td><strong>Score: 1</strong><br>~1% of users (8% population colorblind × 12% severely affected)</td>
+          <td><strong>Score: 4</strong><br>Major pain - cannot read charts properly, affects trading decisions</td>
+          <td><strong>Score: 5</strong><br>Every time they look at charts (daily for affected users)</td>
+          <td><strong>10</strong><br>High Priority</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4>Final Priority Ranking:</h4>
+    <div class="framework-box">
+      <ol>
+        <li><strong>App logout issue (13)</strong> - Affects largest group with highest frequency</li>
+        <li><strong>Web watchlist crash (11)</strong> - Critical severity for power users (who generate most revenue)</li>
+        <li><strong>Chart colors (10)</strong> - High severity for affected users, accessibility compliance</li>
+        <li><strong>Penny stock alerts (9)</strong> - Moderate across all dimensions</li>
+        <li><strong>Dividend history (7)</strong> - Low impact, nice-to-have feature</li>
+      </ol>
+    </div>
+
+    <div class="tip-box">
+      <h4>🤔 Key Learning: Power User vs Volume Trade-off</h4>
+      <p><strong>Interesting dilemma:</strong> Web crash (score 11) vs Colorblind charts (score 10)</p>
+      <ul>
+        <li><strong>Volume perspective:</strong> More users affected by colorblind issue</li>
+        <li><strong>Revenue perspective:</strong> Power users with large watchlists generate 10x more brokerage revenue</li>
+      </ul>
+      <p><strong>PM Decision Framework:</strong> When scores are close (within 1-2 points), consider revenue impact and strategic importance to break ties</p>
+    </div>
+
+    <h3 id="common-mistakes">3.1.6 Common Mistakes PMs Make</h3>
+
+    <h4>Mistake 1: HiPPO Syndrome (Highest Paid Person's Opinion)</h4>
+    <div class="example-box">
+      <p><strong>Scenario:</strong> CEO walks into your sprint planning meeting</p>
+      <p><strong>CEO:</strong> "That dark mode color in our app looks terrible. Fix it this sprint."</p>
+      <p><strong>What PM typically does:</strong> Inflates the score to justify CEO's request</p>
+      <ul>
+        <li>Claims spread is higher than it is</li>
+        <li>Argues it affects "brand perception" (inflated severity)</li>
+        <li>Pushes it to critical priority</li>
+      </ul>
+      <p><strong>What PM should do:</strong></p>
+      <ul>
+        <li>Score it objectively (likely 1-1-4 = 6, low priority)</li>
+        <li>Show CEO the Problem Matrix with all scored problems</li>
+        <li>Say: "Happy to fix this, but here's what we'd delay. Are you okay with that trade-off?"</li>
+        <li>Educate CEO on the framework over time</li>
+      </ul>
+      <p><strong>How to avoid:</strong> Make the scoring process transparent and collaborative. Show your work.</p>
+    </div>
+
+    <h4>Mistake 2: Squeaky Wheel Gets the Grease</h4>
+    <div class="example-box">
+      <p><strong>Scenario:</strong> 500 users flood Twitter with complaints about a feature</p>
+      <p><strong>What it looks like:</strong> Massive user outcry, trending hashtags, PR team panicking</p>
+      <p><strong>What PM typically assumes:</strong> High spread because so many people are complaining</p>
+      <p><strong>The reality check:</strong> 500 vocal users out of 10 million total users = 0.005% spread</p>
+      <p><strong>Why this happens:</strong></p>
+      <ul>
+        <li>Vocal users are often power users (they care more)</li>
+        <li>Social media amplifies complaints</li>
+        <li>Silence doesn't mean satisfaction</li>
+      </ul>
+      <p><strong>How to avoid:</strong> Always measure actual spread with data, not complaint volume</p>
+    </div>
+
+    <h4>Mistake 3: Ignoring Compound Frequency</h4>
+    <div class="example-box">
+      <p><strong>Scenario:</strong> Individual users face a problem only once per month (frequency = 3)</p>
+      <p><strong>PM thinking:</strong> "Low frequency, not urgent"</p>
+      <p><strong>Hidden calculation:</strong> 1 million users × once per month = 33,333 problem occurrences daily</p>
+      <p><strong>Aggregate impact:</strong> Massive - one of your users faces this problem every 2.6 seconds</p>
+      <p><strong>Why PMs miss this:</strong> They think about individual user experience, not aggregate experience</p>
+      <p><strong>How to avoid:</strong> Calculate total occurrences = Number of affected users × Individual frequency</p>
+    </div>
+
+    <h4>Mistake 4: Personal Bias</h4>
+    <div class="example-box">
+      <p><strong>Common biases affecting PM scoring:</strong></p>
+      <ul>
+        <li><strong>Platform bias:</strong> PM uses iOS, so iOS bugs seem more severe</li>
+        <li><strong>Feature bias:</strong> PM built a feature, so problems with that feature seem less severe</li>
+        <li><strong>Technical bias:</strong> PM finds technical problems more interesting than UX problems</li>
+        <li><strong>Personal use bias:</strong> PM doesn't use certain features, so problems there seem less important</li>
+      </ul>
+      <p><strong>Example:</strong> PM who doesn't use dark mode consistently underscores dark mode problems</p>
+      <p><strong>How to avoid:</strong></p>
+      <ul>
+        <li>Always score from user perspective, not your own</li>
+        <li>Use data to validate your scores</li>
+        <li>Get second opinions from other team members</li>
+        <li>Do regular user interviews to stay connected to different user segments</li>
+      </ul>
+    </div>
+
+    <h3 id="practice-exercise-2">3.1.7 Practice Exercise 2: Real PM Challenge</h3>
+    <div class="exercise-box">
+      <h4>🎯 Advanced Exercise: Urban Company Problem Triage</h4>
+      <p>
+        You're the PM at Urban Company. It's Monday morning, and you have 6 problems identified from various sources. Your engineering team can fix only 3 problems this quarter due to resource constraints.
+      </p>
+
+      <h5>Company Context:</h5>
+      <ul>
+        <li><strong>Urban Company:</strong> On-demand home services (beauty, cleaning, repairs)</li>
+        <li><strong>Users:</strong> 10M registered, 2M monthly active</li>
+        <li><strong>Service Partners:</strong> 50K beauticians, cleaners, technicians</li>
+        <li><strong>Business Model:</strong> Take 20-30% commission per service</li>
+      </ul>
+
+      <h5>The 6 Problems (you need to gather data to score them):</h5>
+      <ol>
+        <li><strong>Partner cancels service 2 hours before appointment</strong><br>
+          <em>Source:</em> Customer complaints, 1-star reviews</li>
+        <li><strong>Cannot book same partner for repeat service</strong><br>
+          <em>Source:</em> Feature request from customers who liked their previous partner</li>
+        <li><strong>Partner arrives but doesn't have required equipment</strong><br>
+          <em>Source:</em> Support tickets, service completion failures</li>
+        <li><strong>App crashes when trying to reschedule appointment</strong><br>
+          <em>Source:</em> Technical logs, user session recordings</li>
+        <li><strong>No way to tip partner through the app</strong><br>
+          <em>Source:</em> Customer feedback, partner requests</li>
+        <li><strong>Pricing not clear until after service completion</strong><br>
+          <em>Source:</em> Customer complaints about surprise charges</li>
+      </ol>
+
+      <h5>Your Task - Information Gathering Phase:</h5>
+      <p>
+        Before you can score these problems, you need to ask the right questions to gather data. For each problem, what specific data would you request from:
+      </p>
+      <ul>
+        <li>Analytics team (usage data, user behavior)</li>
+        <li>Support team (ticket volume, complaint patterns)</li>
+        <li>Business team (revenue impact, operational metrics)</li>
+        <li>User research team (user interviews, surveys)</li>
+      </ul>
+
+      <h5>Example for Problem 1:</h5>
+      <ul>
+        <li><strong>Analytics:</strong> "What % of bookings get cancelled by partners within 2 hours? How does this vary by service type, time of day, city?"</li>
+        <li><strong>Support:</strong> "How many complaints about last-minute cancellations? What do users say when this happens?"</li>
+        <li><strong>Business:</strong> "Revenue lost from cancelled bookings? User churn rate after experiencing cancellation?"</li>
+        <li><strong>User Research:</strong> "How do users feel when partners cancel? Do they rebook immediately or switch platforms?"</li>
+      </ul>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2 id="section-3-2">Section 3.2: Market Research</h2>
+
+    <h3 id="market-research-intro">3.2.1 What is Market Research and Why Does It Matter?</h3>
+    <div class="story-box">
+      <h4>🏆 Success Story: How Zepto Cracked Quick Commerce</h4>
+      <p><strong>The Observation (2021):</strong> Founders noticed quick commerce (10-minute delivery) working in China and Korea</p>
+      <p><strong>The Question:</strong> "Will Indians pay a premium for 10-minute grocery delivery, or do they prefer cheap delivery even if it takes 2 days?"</p>
+
+      <h5>Research Phase 1 - Secondary Research:</h5>
+      <ul>
+        <li>Read reports on Indian e-commerce behavior</li>
+        <li>Analyzed BigBasket and Grofers delivery patterns</li>
+        <li>Found gap: No one doing sub-30 minute delivery</li>
+      </ul>
+
+      <h5>Research Phase 2 - Primary Research:</h5>
+      <ul>
+        <li>Surveyed 1000 urban customers in Mumbai</li>
+        <li><strong>Key finding:</strong> 65% said "Yes" to premium pricing for essentials (milk, medicines, baby food)</li>
+        <li><strong>Willingness to pay:</strong> ₹30-50 delivery fee for 10-minute speed</li>
+        <li><strong>Trigger moments:</strong> "ran out of milk for morning tea," "baby needs diapers at night"</li>
+      </ul>
+
+      <h5>Research Phase 3 - MVP Testing:</h5>
+      <ul>
+        <li>Started operations in just 2 neighborhoods in Mumbai</li>
+        <li><strong>Measured:</strong> Order frequency, repeat rate, complaints</li>
+        <li><strong>Result:</strong> 40% repeat rate in Week 1, 60% by Week 4</li>
+      </ul>
+
+      <p><strong>Decision Point:</strong> Only AFTER validating demand did they raise ₹60 crore and scale to 10 cities</p>
+      <p><strong>Outcome:</strong> ₹2000+ crore GMV in Year 2, successful validation of quick commerce in India</p>
+    </div>
+
+    <h4>What Happens When You Skip Market Research?</h4>
+    <p>For every Zepto success story, there are dozens of failures that could have been avoided with proper research:</p>
+    <ul>
+      <li><strong>Build the wrong thing:</strong> 6 months of engineering wasted on features nobody wants</li>
+      <li><strong>Target the wrong users:</strong> Marketing budget spent reaching people who'll never convert</li>
+      <li><strong>Price it wrong:</strong> Either leave money on the table or price yourself out of market</li>
+      <li><strong>Run out of runway:</strong> Burn cash while figuring out what users actually want</li>
+      <li><strong>Miss the timing:</strong> By the time you pivot, competitors have captured the market</li>
+    </ul>
+
+    <h3 id="two-types">3.2.2 Two Types of Market Research</h3>
+    <p>Not all market research serves the same purpose. You need different approaches for different questions:</p>
+
+    <h4 id="opportunity-research">TYPE 1: OPPORTUNITY RESEARCH</h4>
+    <p><strong>"Is there a market for my idea?"</strong></p>
+
+    <div class="framework-box">
+      <h5>Use this when:</h5>
+      <ul>
+        <li>You have a product idea but don't know if there's demand</li>
+        <li>Entering a new market or geography</li>
+        <li>Exploring a new user segment</li>
+        <li>Deciding between multiple product ideas</li>
+      </ul>
+
+      <h5>What you're researching:</h5>
+      <ul>
+        <li><strong>Market size:</strong> TAM, SAM, SOM (covered in Section 3.3)</li>
+        <li><strong>User needs:</strong> What problems do they have? How painful are they?</li>
+        <li><strong>Existing solutions:</strong> What do people use today? Where are the gaps?</li>
+        <li><strong>Competition landscape:</strong> Who else is solving this? How well?</li>
+        <li><strong>Market trends:</strong> Is this market growing/shrinking? What's driving change?</li>
+      </ul>
+    </div>
+
+    <div class="example-box">
+      <h5>📱 Example: Cred's Opportunity Research (2018)</h5>
+      <p><strong>Market Opportunity Research:</strong></p>
+      <ul>
+        <li><strong>Market size:</strong> 50M credit card holders in India (TAM)</li>
+        <li><strong>Target refinement:</strong> Only 20M pay on time consistently (SAM - their target audience)</li>
+        <li><strong>Market growth:</strong> Credit cards growing 25% annually</li>
+      </ul>
+
+      <p><strong>User Need Research:</strong> Interviewed 200 credit card users across 6 cities</p>
+      <ul>
+        <li>75% forget payment dates (despite smartphone reminders)</li>
+        <li>60% don't track or redeem reward points</li>
+        <li>80% find bank apps confusing for credit card management</li>
+        <li>45% have missed payments despite having money</li>
+      </ul>
+
+      <p><strong>Competition Analysis:</strong></p>
+      <ul>
+        <li><strong>Bank apps:</strong> Clunky, not focused on credit cards, poor UX</li>
+        <li><strong>Paytm:</strong> Has credit card bill payment, but buried feature, no rewards focus</li>
+        <li><strong>Gap identified:</strong> No app designed specifically for credit card users with reward optimization</li>
+      </ul>
+
+      <p><strong>Decision:</strong> Clear opportunity in underserved, affluent segment willing to pay for better experience</p>
+    </div>
+
+    <h4 id="validation-research">TYPE 2: VALIDATION RESEARCH</h4>
+    <p><strong>"Will users actually use and pay for MY solution?"</strong></p>
+
+    <div class="framework-box">
+      <h5>Use this when:</h5>
+      <ul>
+        <li>You've defined your solution concept</li>
+        <li>Before building the full product (MVP validation)</li>
+        <li>Testing new features on existing product</li>
+        <li>Validating pricing strategy</li>
+      </ul>
+
+      <h5>What you're researching:</h5>
+      <ul>
+        <li><strong>User behavior:</strong> Will they actually use this? How often?</li>
+        <li><strong>Willingness to pay:</strong> At what price point? What's too expensive?</li>
+        <li><strong>Feature prioritization:</strong> Which features matter most?</li>
+        <li><strong>Usability:</strong> Can they actually use your solution?</li>
+        <li><strong>Messaging:</strong> What positioning resonates with them?</li>
+      </ul>
+    </div>
+
+    <div class="example-box">
+      <h5>👓 Example: Lenskart's Home Try-On Validation (2014)</h5>
+      <p><strong>The Hypothesis:</strong> "Users will buy eyewear online if they can try frames at home first"</p>
+
+      <h5>Validation Test Design:</h5>
+      <ul>
+        <li><strong>Test group:</strong> 500 users in Delhi and Mumbai</li>
+        <li><strong>Process:</strong> Users select 3 frames, Lenskart ships them for free trial</li>
+        <li><strong>Metrics:</strong> Conversion rate, return rate, customer satisfaction</li>
+        <li><strong>Result:</strong> 35% conversion rate (vs 8% for online-only), 12% return rate (acceptable)</li>
+        <li><strong>Decision:</strong> Scale home try-on to all cities, became core differentiator</li>
+      </ul>
+    </div>
+
+    <div class="footer">
+      <p>© 2024 Skillship AI. All rights reserved.</p>
+      <p>Module 3: Defining Problems & Market Research | Week 3, Class 1</p>
+    </div>
+  </main>
+
+  <script>
+    // Smooth scroll and active navigation highlighting
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          // Update active state
+          document.querySelectorAll('.nav-menu a').forEach(a => a.classList.remove('active'));
+          this.classList.add('active');
+        }
+      });
+    });
+
+    // Highlight active section on scroll
+    const sections = document.querySelectorAll('h2, h3[id]');
+    const navLinks = document.querySelectorAll('.nav-menu a');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (window.pageYOffset >= sectionTop - 200) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
